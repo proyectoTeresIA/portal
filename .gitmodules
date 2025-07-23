@@ -1,0 +1,6 @@
+[submodule "frontend"]
+	path = frontend
+	url = git@github.com:proyectoTeresIA/ontoportal_ui.git
+[submodule "api"]
+	path = api
+	url = git@github.com:proyectoTeresIA/ontoportal_api.git

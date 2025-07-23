@@ -19,20 +19,24 @@ El desarrollo se basa en **OntoPortal** (plataforma de código abierto para onto
 El sistema se estructura en cinco capas principales:
 
 1. **OntoPortal como núcleo funcional**
+
    - Metabuscador y catálogo de terminologías.
    - Gestión de usuarios y permisos.
 
 2. **Almacenamiento híbrido de datos**
+
    - Combinación de bases RDF y almacenamientos en crudo para datos procesados y terminologías:
      - **Virtuoso** y **AllegroGraph** para datos semánticos.
      - **Neo4j** para grafos de relaciones.
      - **Elasticsearch** para indexación y búsqueda documental.
 
 3. **Servicios de IA**
+
    - Extracción automática de terminologías.
    - Enriquecimiento semántico: relaciones, desambiguación, enlazado.
 
 4. **Frontend React**
+
    - Interfaz moderna para visualización, edición y validación colaborativa.
 
 5. **Microservicios y API Gateway**
@@ -45,14 +49,14 @@ El sistema se estructura en cinco capas principales:
 
 El desarrollo se estructura en **6 hitos** (1 por mes), con entregas acumulativas:
 
-| Mes | Hito | Entregable | % Avance |
-|-----|------|------------|----------|
-| 1 | **E1 – Infraestructura** | Despliegue de OntoPortal, arquitectura técnica, CI/CD | 10% |
-| 2 | **E2 – Catálogo de Terminologías** | OntoPortal adaptado, metabuscador funcional, ingesta RDF/CSV | 20% |
-| 3 | **E3 – Almacenamiento y APIs** | Integración con Virtuoso, AllegroGraph y Neo4j, APIs de acceso y extracción | 20% |
-| 4 | **E4 – IA y Validación Colaborativa** | Pipeline de extracción y módulo de edición colaborativa | 20% |
-| 5 | **E5 – Frontend React y Gestión de Usuarios** | Interfaz web, registro, login y sistema de roles | 15% |
-| 6 | **E6 – Optimización y Despliegue Final** | Seguridad, monitorización, pruebas de estrés y entrega final | 15% |
+| Mes | Hito                                          | Entregable                                                                  | % Avance |
+| --- | --------------------------------------------- | --------------------------------------------------------------------------- | -------- |
+| 1   | **E1 – Infraestructura**                      | Despliegue de OntoPortal, arquitectura técnica, CI/CD                       | 10%      |
+| 2   | **E2 – Catálogo de Terminologías**            | OntoPortal adaptado, metabuscador funcional, ingesta RDF/CSV                | 20%      |
+| 3   | **E3 – Almacenamiento y APIs**                | Integración con Virtuoso, AllegroGraph y Neo4j, APIs de acceso y extracción | 20%      |
+| 4   | **E4 – IA y Validación Colaborativa**         | Pipeline de extracción y módulo de edición colaborativa                     | 20%      |
+| 5   | **E5 – Frontend React y Gestión de Usuarios** | Interfaz web, registro, login y sistema de roles                            | 15%      |
+| 6   | **E6 – Optimización y Despliegue Final**      | Seguridad, monitorización, pruebas de estrés y entrega final                | 15%      |
 
 Cada hito cuenta con su propia **memoria técnica**, siguiendo una estructura estandarizada (E1, E2, ...).
 
@@ -60,29 +64,47 @@ Cada hito cuenta con su propia **memoria técnica**, siguiendo una estructura es
 
 ## Despliegue y Entorno de Desarrollo
 
+En esta versión inicial del OntoPortal, se utilizan los servicios que utiliza OntoPortal por defecto:
+
+- **Redis**: Base de datos en memoria para caché.
+- **Solr**: Motor de búsqueda para indexación.
+- **Mgrep**: Servicio de anotación y búsqueda.
+- Bases de datos RDF. Se pueden utilizar dos opciones:
+  - **4store**: Base de datos de grafos RDF.
+  - **AllegroGraph**: Base de datos de grafos RDF.
+
 ### Requisitos Previos
 
-- **Docker** 20.x y **Docker Compose** 2.x  
-- **Node.js** 18.x para el frontend  
-- **Java** 11+ y **SpringBoot** (backend)  
+- **Docker** 20.x y **Docker Compose** 2.x
 - 8 GB de RAM recomendados
 
 ### Instalación Rápida (Infraestructura Base)
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/ontoportal/ontoportal_docker.git
-cd ontoportal_docker
+git clone https://github.com/proyectoTeresIA/portal
+
+# Descargar submódulos
+git submodule init
+git submodule update
 
 # Configurar entorno
 cp .env.sample .env
-# Editar variables: MYSQL, VIRTUOSO, host, etc.
 
-# Levantar servicios
-docker compose up -d
-````
+# Editar variables de entorno según sea necesario.
+# Para simplemente testear, no es necesario modificar nada.
 
-El acceso inicial se realiza en: http://localhost:8080
+# Levantar servicios con la API usando 4store:
+docker compose --profile 4store up -d
+
+# O levantar los servicios con la API usando AllegroGraph:
+docker compose --profile agraph up -d
+```
+
+Una vez levantados los servicios, se puede acceder a la interfaz web en:
+
+- **Frontend**: http://localhost:3000
+- **API**: http://localhost:9393
 
 ## Licencia
 
