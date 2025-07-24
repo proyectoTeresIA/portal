@@ -10,7 +10,7 @@ x-api-app: &api-app
     BUNDLE_APP_CONFIG: /srv/ontoportal/ontologies_api/.bundle
     COVERAGE: "true"
     OVERRIDE_CONFIG: "true"
-    REST_URL_PREFIX: "http://localhost:9393/"
+    REST_URL_PREFIX: "http://api:9393"
     GOO_REDIS_HOST: redis-ut
     REDIS_GOO_CACHE_HOST: redis-ut
     REDIS_HTTP_CACHE_HOST: redis-ut
@@ -96,6 +96,7 @@ services:
       - "9393:9393"
     environment:
       <<: *api-env
+      REST_URL_PREFIX: "http://api-agraph:9393/"
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -279,7 +280,7 @@ services:
       MYSQL_DATABASE: bioportal_ui_development
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./frontend/config/initializers/init-mysql.sh:/docker-entrypoint-initdb.d/init-mysql.sh
+      - ./frontend/db/init-mysql.sh:/docker-entrypoint-initdb.d/init-mysql.sh
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 5s

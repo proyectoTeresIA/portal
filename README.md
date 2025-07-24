@@ -80,25 +80,51 @@ En esta versión inicial del OntoPortal, se utilizan los servicios que utiliza O
 
 ### Instalación Rápida (Infraestructura Base)
 
+Clonar repositorio y descargar submódulos:
+
 ```bash
-# Clonar repositorio
 git clone https://github.com/proyectoTeresIA/portal
 
-# Descargar submódulos
 git submodule init
 git submodule update
+```
 
-# Configurar entorno
+Configurar entorno
+
+```bash
 cp .env.sample .env
+```
 
-# Editar variables de entorno según sea necesario.
-# Para simplemente testear, no es necesario modificar nada.
+Editar variables de entorno según sea necesario. Para simplemente testear, no es necesario modificar nada.
 
-# Levantar servicios con la API usando 4store:
+Levantar servicios con la API usando 4store:
+
+```bash
 docker compose --profile 4store up -d
+```
 
-# O levantar los servicios con la API usando AllegroGraph:
+O levantar los servicios con la API usando AllegroGraph:
+
+```bash
 docker compose --profile agraph up -d
+```
+
+A continuación, hay que crear el usuario administrador para que la interfaz web funcione correctamente:
+
+```bash
+docker compose exec api bash -c "ruby create_admin_user.rb"
+```
+
+En la consola aparecerá la API Key, que se debe copiar y pegar en el archivo `.env` como valor de `API_KEY`:
+
+```bash
+API_KEY=la_clave_api_generada
+```
+
+Una vez configurada la clave API, hay que reiniciar el servicio del frontend para que reconozca la nueva clave:
+
+```bash
+docker compose restart frontend-dev
 ```
 
 Una vez levantados los servicios, se puede acceder a la interfaz web en:
@@ -109,3 +135,7 @@ Una vez levantados los servicios, se puede acceder a la interfaz web en:
 ## Licencia
 
 El proyecto se desarrolla siguiendo estándares abiertos y es compatible con las licencias de uso de los recursos integrados.
+
+```
+
+```
