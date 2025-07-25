@@ -10,7 +10,7 @@ x-api-app: &api-app
     BUNDLE_APP_CONFIG: /srv/ontoportal/ontologies_api/.bundle
     COVERAGE: "true"
     OVERRIDE_CONFIG: "true"
-    REST_URL_PREFIX: "http://api:9393"
+    REST_URL_PREFIX: "http://api:9393/"
     GOO_REDIS_HOST: redis-ut
     REDIS_GOO_CACHE_HOST: redis-ut
     REDIS_HTTP_CACHE_HOST: redis-ut
