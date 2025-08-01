@@ -66,16 +66,23 @@ Cada hito cuenta con su propia **memoria técnica**, siguiendo una estructura es
 
 En esta versión inicial del OntoPortal, se utilizan los servicios que utiliza OntoPortal por defecto:
 
-- **Redis**: Base de datos en memoria para caché.
-- **Solr**: Motor de búsqueda para indexación.
-- **Mgrep**: Servicio de anotación y búsqueda.
-- Bases de datos RDF. Se pueden utilizar dos opciones:
-  - **4store**: Base de datos de grafos RDF.
-  - **AllegroGraph**: Base de datos de grafos RDF.
+- **Ruby** (v3.1.6): Lenguaje de programación de la API y el frontend.
+- **Sinatra** (v1.0): Framework web en Ruby para el backend.
+- **Rails** (v7.2.2.1): Framework web en Ruby para el frontend.
+- **JavaScript** para extender la interactividad y visualización en el frontend con **Node.js** (v20) para compilar ese código en JavaScript.
+- **Docker** (v28.3.3): Para el despliegue de todos los servicios.
+- Servicios:
+  - **Redis** (v8): Base de datos en memoria para caché.
+  - **Solr** (v8): Motor de búsqueda para indexación.
+  - **Mgrep** (v0.0.2): Servicio de anotación y búsqueda de Ontoportal.
+  - Bases de datos RDF. Se pueden utilizar dos opciones:
+    - **4store** (v1.1.6): Base de datos de grafos RDF.
+    - **AllegroGraph** (v8.1.0): Base de datos de grafos RDF.
+  - **MySQL** (v8.0): Base de datos para licencias y usuarios.
 
 ### Requisitos Previos
 
-- **Docker** 20.x y **Docker Compose** 2.x
+- **Docker** 20.x.
 - 8 GB de RAM recomendados
 
 ### Instalación Rápida (Infraestructura Base)
@@ -113,6 +120,12 @@ A continuación, hay que crear el usuario administrador para que la interfaz web
 
 ```bash
 docker compose exec api bash -c "ruby create_admin_user.rb"
+```
+
+O, si se utiliza AllegroGraph:
+
+```bash
+docker compose exec api-agraph bash -c "ruby create_admin_user.rb"
 ```
 
 En la consola aparecerá la API Key, que se debe copiar y pegar en el archivo `.env` como valor de `API_KEY`:
