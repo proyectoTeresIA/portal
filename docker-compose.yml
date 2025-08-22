@@ -122,7 +122,7 @@ services:
       - "9393:9393"
     environment:
       <<: *api-env
-      REST_URL_PREFIX: "http://api-agraph:9393/"
+      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://api-agraph:9393}
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -149,7 +149,7 @@ services:
       REDIS_PERSISTENT_HOST: redis-ut
       REDIS_GOO_CACHE_HOST: redis-ut
       REDIS_HTTP_CACHE_HOST: redis-ut
-      REST_URL_PREFIX: "http://api-agraph:9393/"
+      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://api-agraph:9393}
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -202,6 +202,7 @@ services:
       <<: *frontend-env
       RAILS_ENV: development
       API_URL: http://api-agraph:9393
+      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://api-agraph:9393}
     networks:
       - internal
     extra_hosts:
