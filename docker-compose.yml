@@ -89,11 +89,17 @@ services:
         condition: service_started
     networks:
       - internal
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
 
   # NcboCron Worker Service for processing ontologies (4store)
   ncbo-cron-worker-4store:
     <<: *api-app
-    command: bash -c "cd /srv/ontoportal/ontologies_api && bundle exec ncbo_cron --log-level info & tail -f /srv/ontoportal/ontologies_api/log/scheduler.log"
+    command: bash /srv/ontoportal/ontologies_api/start-ncbo-cron.sh
     environment:
       <<: *api-env
       GOO_BACKEND_NAME: 4store
@@ -109,7 +115,7 @@ services:
       4store-ut:
         condition: service_started
       api:
-        condition: service_started
+        condition: service_healthy
     networks:
       - internal
     volumes:
@@ -137,18 +143,19 @@ services:
         condition: service_healthy
     networks:
       - internal
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
 
   # NcboCron Worker Service for processing ontologies
   ncbo-cron-worker:
     <<: *api-app
-    command: bash -c "cd /srv/ontoportal/ontologies_api && bundle exec ncbo_cron --log-level info & tail -f /srv/ontoportal/ontologies_api/log/scheduler.log"
+    command: bash /srv/ontoportal/ontologies_api/start-ncbo-cron.sh
     environment:
       <<: *api-env
-      REDIS_HOST: redis-ut
-      REDIS_PORT: 6379
-      REDIS_PERSISTENT_HOST: redis-ut
-      REDIS_GOO_CACHE_HOST: redis-ut
-      REDIS_HTTP_CACHE_HOST: redis-ut
       REST_URL_PREFIX: ${REST_URL_PREFIX:-http://api-agraph:9393}
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
@@ -163,7 +170,7 @@ services:
       agraph-ut:
         condition: service_healthy
       api-agraph:
-        condition: service_started
+        condition: service_healthy
     networks:
       - internal
     volumes:
