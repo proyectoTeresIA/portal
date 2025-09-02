@@ -10,6 +10,7 @@ x-api-app: &api-app
     BUNDLE_APP_CONFIG: /srv/ontoportal/ontologies_api/.bundle
     COVERAGE: "true"
     OVERRIDE_CONFIG: "true"
+    API_KEY: ${API_KEY}
     REST_URL_PREFIX: "http://api:9393/"
     GOO_REDIS_HOST: redis-ut
     REDIS_GOO_CACHE_HOST: redis-ut
@@ -61,6 +62,7 @@ x-frontend-app: &frontend-app
   environment: &frontend-env
     BUNDLE_WITHOUT: ""
     BUNDLE_PATH: /usr/local/bundle
+    API_KEY: ${API_KEY}
     DB_HOST: db
     MEMCACHE_SERVERS: "cache:11211"
   tmpfs:
@@ -71,8 +73,6 @@ services:
   # API Services
   api:
     <<: *api-app
-    ports:
-      - "9393:9393"
     environment:
       <<: *api-env
       GOO_BACKEND_NAME: 4store
@@ -88,7 +88,9 @@ services:
       4store-ut:
         condition: service_started
     networks:
-      - internal
+      internal:
+        aliases:
+          - api
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
       interval: 30s
@@ -124,11 +126,9 @@ services:
 
   api-agraph:
     <<: *api-app
-    ports:
-      - "9393:9393"
     environment:
       <<: *api-env
-      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://api-agraph:9393}
+      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://nginx/api/}
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -142,7 +142,9 @@ services:
       agraph-ut:
         condition: service_healthy
     networks:
-      - internal
+      internal:
+        aliases:
+          - api
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
       interval: 30s
@@ -156,7 +158,7 @@ services:
     command: bash /srv/ontoportal/ontologies_api/start-ncbo-cron.sh
     environment:
       <<: *api-env
-      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://api-agraph:9393}
+      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://nginx/api/}
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -177,18 +179,31 @@ services:
       - api-bundle:/srv/ontoportal/bundle
       - ./api:/srv/ontoportal/ontologies_api
 
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - internal
+    restart: unless-stopped
+    profiles:
+      - 4store
+      - agraph
+
   # Frontend Services
   frontend-dev:
     <<: *frontend-app
     command: bash -c "yarn install && bundle install && ./bin/setup && ./bin/rails s -b 0.0.0.0"
-    ports:
-      - "3000:3000"
     environment:
       <<: *frontend-env
       RAILS_ENV: development
-      API_URL: http://api:9393
+      API_URL: http://nginx/api/
     networks:
-      - internal
+      internal:
+        aliases:
+          - frontend
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -203,15 +218,15 @@ services:
   frontend-dev-agraph:
     <<: *frontend-app
     command: bash -c "yarn install && bundle install && ./bin/setup && ./bin/rails s -b 0.0.0.0"
-    ports:
-      - "3000:3000"
     environment:
       <<: *frontend-env
       RAILS_ENV: development
-      API_URL: http://api-agraph:9393
-      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://api-agraph:9393}
+      API_URL: http://nginx/api/
+      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://nginx/api/}
     networks:
-      - internal
+      internal:
+        aliases:
+          - frontend
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
