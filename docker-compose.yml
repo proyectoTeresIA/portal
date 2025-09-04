@@ -128,7 +128,7 @@ services:
     <<: *api-app
     environment:
       <<: *api-env
-      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://nginx/api/}
+      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://api:9393/}
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -199,7 +199,8 @@ services:
     environment:
       <<: *frontend-env
       RAILS_ENV: development
-      API_URL: http://nginx/api/
+      API_URL: http://api:9393/
+      EXTERNAL_API_URL: http://localhost/api/
     networks:
       internal:
         aliases:
@@ -221,8 +222,8 @@ services:
     environment:
       <<: *frontend-env
       RAILS_ENV: development
-      API_URL: http://nginx/api/
-      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://nginx/api/}
+      API_URL: http://api:9393/
+      EXTERNAL_API_URL: http://localhost/api/
     networks:
       internal:
         aliases:
@@ -366,13 +367,41 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-changeme}
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD:-changeme}
       MYSQL_DATABASE: bioportal_ui_development
+      # Persistence and performance settings
+      MYSQL_INNODB_BUFFER_POOL_SIZE: 256M
+      MYSQL_INNODB_FLUSH_LOG_AT_TRX_COMMIT: 2
+      MYSQL_INNODB_FLUSH_METHOD: O_DIRECT
     volumes:
       - mysql-data:/var/lib/mysql
       - ./frontend/db/init-mysql.sh:/docker-entrypoint-initdb.d/init-mysql.sh
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --innodb-buffer-pool-size=256M
+      --innodb-redo-log-capacity=134217728
+      --innodb-flush-log-at-trx-commit=2
+      --innodb-flush-method=O_DIRECT
+      --max-connections=200
+      --slow-query-log=1
+      --long-query-time=2
+      --binlog-expire-logs-seconds=604800
+      --max-binlog-size=100M
+    restart: unless-stopped
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 5s
-      retries: 3
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-p${MYSQL_PASSWORD:-changeme}",
+        ]
+      timeout: 10s
+      retries: 5
+      interval: 30s
+      start_period: 60s
 
   cache:
     image: memcached:latest
@@ -447,16 +476,36 @@ volumes:
     driver: local
   frontend-bundle:
   mysql-data:
+    name: portal_mysql_persistent
+    external: true
   rails_cache:
   assets:
   node:
   app_ui:
   elasticsearch-data:
+    name: portal_elasticsearch_persistent
+    driver: local
   neo4j-data:
+    name: portal_neo4j_data_persistent
+    driver: local
   neo4j-logs:
+    name: portal_neo4j_logs_persistent
+    driver: local
   neo4j-import:
+    name: portal_neo4j_import_persistent
+    driver: local
   neo4j-plugins:
+    name: portal_neo4j_plugins_persistent
+    driver: local
   redis-data:
+    name: portal_redis_persistent
+    driver: local
   4store-data:
+    name: portal_4store_persistent
+    driver: local
   solr-data:
+    name: portal_solr_persistent
+    driver: local
   agraph-data:
+    name: portal_agraph_persistent
+    driver: local
