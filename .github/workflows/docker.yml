@@ -3,8 +3,6 @@ name: Build and publish Docker images
 on:
   push:
     branches: [prod]
-  pull_request:
-    branches: [prod]
   workflow_dispatch: {}
 
 permissions:
@@ -77,7 +75,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./api
-          file: ./api/Dockerfile
           push: true
           tags: |
             ${{ steps.prep.outputs.api_tags }}
@@ -90,7 +87,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./frontend
-          file: ./frontend/Dockerfile
           push: true
           tags: |
             ${{ steps.prep.outputs.ui_tags }}
