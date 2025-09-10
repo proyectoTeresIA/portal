@@ -2,9 +2,9 @@ name: Build and publish Docker images
 
 on:
   push:
-    branches: [main]
+    branches: [prod]
   pull_request:
-    branches: [main]
+    branches: [prod]
   workflow_dispatch: {}
 
 permissions:
@@ -43,12 +43,31 @@ jobs:
           REF=${GITHUB_REF##*/}
           SHA=${GITHUB_SHA::7}
           if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
-            echo "tags=pr-${{ github.event.number }}-$SHA" >> $GITHUB_OUTPUT
-          elif [ "${REF}" = "main" ]; then
-            echo "tags=latest,$SHA" >> $GITHUB_OUTPUT
+            TAGS="pr-${{ github.event.number }}-$SHA"
+          elif [ "${REF}" = "prod" ]; then
+            TAGS="latest $SHA"
           else
-            echo "tags=$REF,$SHA" >> $GITHUB_OUTPUT
+            TAGS="$REF $SHA"
           fi
+
+          API_PREFIX="${REGISTRY}/${IMAGE_NAME_API}"
+          UI_PREFIX="${REGISTRY}/${IMAGE_NAME_UI}"
+
+          {
+            echo 'api_tags<<EOF'
+            for tag in $TAGS; do
+              echo "${API_PREFIX}:$tag"
+            done
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+
+          {
+            echo 'ui_tags<<EOF'
+            for tag in $TAGS; do
+              echo "${UI_PREFIX}:$tag"
+            done
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
 
       - name: Build API image
         uses: docker/build-push-action@v6
@@ -57,9 +76,9 @@ jobs:
           file: ./api/Dockerfile
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ steps.prep.outputs.tags && format('{0}', join(fromJSON('[''' + join(replace(steps.prep.outputs.tags, ',', '\u0027,\u0027'), ''')])) ) }}
+            ${{ steps.prep.outputs.api_tags }}
           labels: |
-            org.opencontainers.image.source=${{ github.repositoryUrl }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -70,8 +89,8 @@ jobs:
           file: ./frontend/Dockerfile
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ steps.prep.outputs.tags && format('{0}', join(fromJSON('[''' + join(replace(steps.prep.outputs.tags, ',', '\u0027,\u0027'), ''')])) ) }}
+            ${{ steps.prep.outputs.ui_tags }}
           labels: |
-            org.opencontainers.image.source=${{ github.repositoryUrl }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
