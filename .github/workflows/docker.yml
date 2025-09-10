@@ -21,6 +21,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Debug workspace contents
+        run: |
+          echo "Root contents:" && ls -la
+          echo "Submodule status:" && git submodule status || true
+          echo "API dir:" && ls -la api || true
+          echo "Frontend dir:" && ls -la frontend || true
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
