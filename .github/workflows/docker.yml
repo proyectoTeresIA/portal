@@ -13,8 +13,8 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME_API: ${{ toLower(github.repository) }}/api-agraph
-  IMAGE_NAME_UI: ${{ toLower(github.repository) }}/frontend-dev-agraph
+  IMAGE_NAME_API: ${{ github.repository }}/api-agraph
+  IMAGE_NAME_UI: ${{ github.repository }}/frontend-dev-agraph
 
 jobs:
   build:
@@ -52,6 +52,10 @@ jobs:
 
           API_PREFIX="${REGISTRY}/${IMAGE_NAME_API}"
           UI_PREFIX="${REGISTRY}/${IMAGE_NAME_UI}"
+
+          # Ensure repository/image names are lowercase (OCI requirement)
+          API_PREFIX=$(echo "$API_PREFIX" | tr '[:upper:]' '[:lower:]')
+          UI_PREFIX=$(echo "$UI_PREFIX" | tr '[:upper:]' '[:lower:]')
 
           {
             echo 'api_tags<<EOF'
