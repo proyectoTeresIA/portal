@@ -44,7 +44,7 @@ jobs:
           SHA=${GITHUB_SHA::7}
           if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
             TAGS="pr-${{ github.event.number }}-$SHA"
-          elif [ "${REF}" = "main" ]; then
+          elif [ "${REF}" = "prod" ]; then
             TAGS="latest $SHA"
           else
             TAGS="$REF $SHA"
