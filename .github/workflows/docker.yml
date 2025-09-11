@@ -11,8 +11,8 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME_API: teresia/portal/api
-  IMAGE_NAME_UI: teresia/portal/frontend
+  IMAGE_NAME_API: proyectoteresia/portal/api
+  IMAGE_NAME_UI: proyectoteresia/portal/frontend
 
 jobs:
   build:

@@ -1,5 +1,5 @@
 x-api-app: &api-app
-  image: ${API_IMAGE:-ghcr.io/teresia/portal/api:latest}
+  image: ${API_IMAGE:-ghcr.io/proyectoteresia/portal/api:latest}
   env_file:
     - .env
   environment: &api-env # Ruby/Bundler
@@ -37,7 +37,7 @@ x-api-app: &api-app
       condition: service_healthy
 
 x-frontend-app: &frontend-app
-  image: ${FRONTEND_IMAGE:-ghcr.io/teresia/portal/frontend:latest}
+  image: ${FRONTEND_IMAGE:-ghcr.io/proyectoteresia/portal/frontend:latest}
   env_file:
     - .env
   environment: &frontend-env
