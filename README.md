@@ -137,7 +137,9 @@ API_KEY=la_clave_api_generada
 Una vez configurada la clave API, hay que reiniciar el servicio del frontend para que reconozca la nueva clave:
 
 ```bash
-docker compose restart frontend-dev
+docker compose restart frontend-dev # Si se usa 4store
+# o
+docker compose restart frontend-dev-agraph # Si se usa AllegroGraph
 ```
 
 Una vez levantados los servicios, se puede acceder a la interfaz web en:
