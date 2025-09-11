@@ -11,8 +11,8 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME_API: ${{ github.repository }}/api-agraph
-  IMAGE_NAME_UI: ${{ github.repository }}/frontend-dev-agraph
+  IMAGE_NAME_API: teresia/portal/api
+  IMAGE_NAME_UI: teresia/portal/frontend
 
 jobs:
   build:
