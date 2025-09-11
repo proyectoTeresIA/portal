@@ -2,7 +2,8 @@ x-api-app: &api-app
   image: ${API_IMAGE:-ghcr.io/proyectoteresia/portal/api:latest}
   env_file:
     - .env
-  environment: &api-env # Ruby/Bundler
+  environment: &api-env
+    # Ruby/Bundler
     BUNDLE_PATH: /srv/ontoportal/bundle
     BUNDLE_APP_CONFIG: /srv/ontoportal/ontologies_api/.bundle
     BUNDLE_WITHOUT: "development test"
@@ -48,6 +49,7 @@ x-frontend-app: &frontend-app
     API_KEY: ${API_KEY}
     DB_HOST: db
     MEMCACHE_SERVERS: "cache:11211"
+    PUMA_BIND_PORT: 3000
   restart: unless-stopped
 
 services:
@@ -164,12 +166,15 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+      - "443:443"
     networks:
       - internal
     restart: unless-stopped
     profiles:
       - 4store
       - agraph
+    volumes:
+      - ./nginx/certs:/etc/nginx/certs:ro
 
   # Frontend Services
   frontend:
