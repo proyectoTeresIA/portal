@@ -11,7 +11,6 @@ x-api-app: &api-app
     COVERAGE: "false"
     OVERRIDE_CONFIG: "true"
     API_KEY: ${API_KEY}
-    REST_URL_PREFIX: "http://api:9393/"
 
     # Redis/Solr/Mgrep
     GOO_REDIS_HOST: redis-ut
@@ -41,6 +40,7 @@ x-api-app: &api-app
 
 x-frontend-app: &frontend-app
   image: ${FRONTEND_IMAGE:-ghcr.io/proyectoteresia/portal/frontend:latest}
+  command: bash -c "yarn install && bundle install && ./bin/setup && ./bin/rails s -b 0.0.0.0"
   env_file:
     - .env
   environment: &frontend-env
@@ -51,7 +51,6 @@ x-frontend-app: &frontend-app
     API_KEY: ${API_KEY}
     DB_HOST: db
     MEMCACHE_SERVERS: "cache:11211"
-    PUMA_BIND_PORT: 3000
   restart: unless-stopped
   volumes:
     - frontend-bundle:/usr/local/bundle
@@ -120,7 +119,6 @@ services:
     <<: *api-app
     environment:
       <<: *api-env
-      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://api:9393/}
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -182,6 +180,9 @@ services:
     profiles:
       - 4store
       - agraph
+    depends_on:
+      api-agraph:
+        condition: service_healthy
     volumes:
       - ./nginx/certs:/etc/nginx/certs:ro
 
