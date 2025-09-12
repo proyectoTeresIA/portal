@@ -188,6 +188,7 @@ services:
         condition: service_healthy
     volumes:
       - ./nginx/certs:/etc/nginx/certs:ro
+      - ./nginx/www:/var/www/certbot:ro
 
   # Frontend Services
   frontend:
@@ -371,6 +372,23 @@ services:
       - internal
     ports:
       - "11211:11211"
+
+  # Certbot service for obtaining and renewing Let's Encrypt certificates.
+  # Once we have domain, run to obtain initial cert (replace DOMAIN and EMAIL):
+  #   docker compose -f docker-compose.production.yml run --rm certbot certonly \
+  #     --webroot -w /var/www/certbot -d DOMAIN --email EMAIL --agree-tos --no-eff-email
+  # Then reload nginx: docker compose -f docker-compose.production.yml exec nginx nginx -s reload
+  # Renewal loop runs twice daily; you can add a deploy-hook to reload nginx automatically.
+  certbot:
+    image: certbot/certbot:latest
+    profiles:
+      - 4store
+      - agraph
+    volumes:
+      - ./nginx/certs:/etc/letsencrypt
+      - ./nginx/www:/var/www/certbot
+    entrypoint: sh
+    command: -c "while :; do certbot renew --webroot -w /var/www/certbot --quiet --deploy-hook 'nginx -s reload || true'; sleep 12h; done"
 
 networks:
   internal:
