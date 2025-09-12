@@ -2,8 +2,7 @@ x-api-app: &api-app
   image: ${API_IMAGE:-ghcr.io/proyectoteresia/portal/api:latest}
   env_file:
     - .env
-  environment: &api-env
-    # Ruby/Bundler
+  environment: &api-env # Ruby/Bundler
     BUNDLE_PATH: /srv/ontoportal/bundle
     BUNDLE_APP_CONFIG: /srv/ontoportal/ontologies_api/.bundle
     BUNDLE_WITHOUT: "development test"
@@ -12,7 +11,6 @@ x-api-app: &api-app
     COVERAGE: "false"
     OVERRIDE_CONFIG: "true"
     API_KEY: ${API_KEY}
-    REST_URL_PREFIX: "http://api:9393/"
 
     # Redis/Solr/Mgrep
     GOO_REDIS_HOST: redis-ut
@@ -29,6 +27,9 @@ x-api-app: &api-app
     MGREP_PORT: 55556
   command: "bundle exec unicorn -p 9393 -o 0.0.0.0"
   restart: unless-stopped
+  volumes:
+    - api-bundle:/srv/ontoportal/bundle
+    - ./api:/srv/ontoportal/ontologies_api
   depends_on: &api-depends-on
     solr-ut:
       condition: service_healthy
@@ -39,6 +40,7 @@ x-api-app: &api-app
 
 x-frontend-app: &frontend-app
   image: ${FRONTEND_IMAGE:-ghcr.io/proyectoteresia/portal/frontend:latest}
+  command: bash -c "yarn install && bundle install && ./bin/setup && ./bin/rails s -b 0.0.0.0"
   env_file:
     - .env
   environment: &frontend-env
@@ -49,8 +51,16 @@ x-frontend-app: &frontend-app
     API_KEY: ${API_KEY}
     DB_HOST: db
     MEMCACHE_SERVERS: "cache:11211"
-    PUMA_BIND_PORT: 3000
   restart: unless-stopped
+  volumes:
+    - frontend-bundle:/usr/local/bundle
+    - node:/node_modules
+    - rails_cache:/app/tmp/cache
+    - assets:/app/public/assets
+    - ./frontend:/app
+  tmpfs:
+    - /tmp
+    - /app/tmp/pids
 
 services:
   # API Services (4store)
@@ -93,8 +103,6 @@ services:
       GOO_PATH_QUERY: /sparql/
       GOO_PATH_DATA: /data/
       GOO_PATH_UPDATE: /update/
-      # Route API calls through nginx in production
-      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://nginx/api/}
     profiles:
       - 4store
     depends_on:
@@ -111,7 +119,6 @@ services:
     <<: *api-app
     environment:
       <<: *api-env
-      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://api:9393/}
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -173,6 +180,9 @@ services:
     profiles:
       - 4store
       - agraph
+    depends_on:
+      api-agraph:
+        condition: service_healthy
     volumes:
       - ./nginx/certs:/etc/nginx/certs:ro
 
@@ -214,6 +224,8 @@ services:
     image: redis:7
     ports:
       - "6379:6379"
+      - "6380:6379"
+      - "6381:6379"
     volumes:
       - redis-data:/data
     healthcheck:
@@ -268,7 +280,7 @@ services:
     image: ontoportal/mgrep:0.0.2
     platform: linux/amd64
     healthcheck:
-      test: ["CMD", "nc", "-z", "127.0.0.1", "55556"]
+      test: ["CMD", "nc", "-z", "-v", "127.0.0.1", "55556"]
       start_period: 3s
       interval: 10s
       timeout: 5s
@@ -287,9 +299,9 @@ services:
       - agraph-data:/agraph/data
     command: >
       bash -c "/agraph/bin/agraph-control --config /agraph/etc/agraph.cfg start
-      ; agtool repos create ontoportal_test || true
-      ; agtool users add anonymous || true
-      ; agtool users grant anonymous root:ontoportal_test:rw || true
+      ; agtool repos create ontoportal_test
+      ; agtool users add anonymous
+      ; agtool users grant anonymous root:ontoportal_test:rw
       ; tail -f /agraph/data/agraph.log"
     healthcheck:
       test: ["CMD-SHELL", "agtool storage-report ontoportal_test || exit 1"]
@@ -318,6 +330,7 @@ services:
       MYSQL_INNODB_FLUSH_METHOD: O_DIRECT
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./frontend/db/init-mysql.sh:/docker-entrypoint-initdb.d/init-mysql.sh
     command: >
       --default-authentication-plugin=mysql_native_password
       --innodb-buffer-pool-size=256M
@@ -358,20 +371,30 @@ services:
 
 networks:
   internal:
+  external:
 
 volumes:
   mysql-data:
-    name: portal_mysql_persistent
+    name: portal_mysql
     external: true
   redis-data:
-    name: portal_redis_persistent
+    name: portal_redis
     driver: local
   4store-data:
-    name: portal_4store_persistent
+    name: portal_4store
     driver: local
   solr-data:
-    name: portal_solr_persistent
+    name: portal_solr
     driver: local
   agraph-data:
-    name: portal_agraph_persistent
+    name: portal_agraph
     driver: local
+  api-bundle:
+    name: ontoportal_api_bundle
+    driver: local
+  frontend-bundle:
+    name: ontoportal_frontend_bundle
+    driver: local
+  rails_cache:
+  assets:
+  node:
