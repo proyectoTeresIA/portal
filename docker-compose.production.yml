@@ -25,11 +25,14 @@ x-api-app: &api-app
     SOLR_PROP_SEARCH_URL: http://solr-ut:8983/solr/prop_search_core1
     MGREP_HOST: mgrep-ut
     MGREP_PORT: 55556
+    REPORT_PATH: /reports/ontologies_report.json
+    DATADIR: /
   command: "bundle exec unicorn -p 9393 -o 0.0.0.0"
   restart: unless-stopped
   volumes:
     - api-bundle:/srv/ontoportal/bundle
     - ./api:/srv/ontoportal/ontologies_api
+    - reports-data:/reports
   depends_on: &api-depends-on
     solr-ut:
       condition: service_healthy
@@ -398,3 +401,6 @@ volumes:
   rails_cache:
   assets:
   node:
+  reports-data:
+    name: portal_reports
+    driver: local
