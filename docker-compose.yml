@@ -186,6 +186,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
     networks:
       - internal
     restart: unless-stopped
