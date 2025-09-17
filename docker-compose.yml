@@ -11,7 +11,6 @@ x-api-app: &api-app
     COVERAGE: "true"
     OVERRIDE_CONFIG: "true"
     API_KEY: ${API_KEY}
-    REST_URL_PREFIX: "http://api:9393/"
     GOO_REDIS_HOST: redis-ut
     REDIS_GOO_CACHE_HOST: redis-ut
     REDIS_HTTP_CACHE_HOST: redis-ut
@@ -45,12 +44,12 @@ x-frontend-app: &frontend-app
       RAILS_ENV: ${RAILS_ENV:-development}
       NODE_ENV: ${NODE_ENV:-development}
       BUNDLE_WITHOUT: ${BUNDLE_WITHOUT:-production test}
+  command: bash -c "./bin/setup && ./bin/rails s -b 0.0.0.0"
   env_file:
     - .env
   tty: true
   volumes:
     - frontend-bundle:/usr/local/bundle
-    - node:/node_modules
     - rails_cache:/app/tmp/cache
     - assets:/app/public/assets
     - ./frontend:/app
@@ -129,7 +128,6 @@ services:
     <<: *api-app
     environment:
       <<: *api-env
-      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://api:9393/}
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -159,7 +157,6 @@ services:
     command: bash /srv/ontoportal/ontologies_api/start-ncbo-cron.sh
     environment:
       <<: *api-env
-      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://nginx/api/}
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -198,7 +195,6 @@ services:
   # Frontend Services
   frontend:
     <<: *frontend-app
-    command: bash -c "yarn install && bundle install && ./bin/setup && ./bin/rails s -b 0.0.0.0"
     environment:
       <<: *frontend-env
     networks:
@@ -218,7 +214,6 @@ services:
 
   frontend-agraph:
     <<: *frontend-app
-    command: bash -c "yarn install && bundle install && ./bin/setup && ./bin/rails s -b 0.0.0.0"
     environment:
       <<: *frontend-env
     networks:
@@ -476,7 +471,6 @@ volumes:
     external: true
   rails_cache:
   assets:
-  node:
   elasticsearch-data:
     name: portal_elasticsearch_persistent
     driver: local

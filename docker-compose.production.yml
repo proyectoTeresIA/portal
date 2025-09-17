@@ -43,7 +43,7 @@ x-api-app: &api-app
 
 x-frontend-app: &frontend-app
   image: ${FRONTEND_IMAGE:-ghcr.io/proyectoteresia/portal/frontend:latest}
-  command: bash -c "yarn install && bundle install && ./bin/setup && ./bin/rails s -b 0.0.0.0"
+  command: bash -c "./bin/setup && ./bin/rails s -b 0.0.0.0"
   env_file:
     - .env
   environment: &frontend-env
@@ -57,10 +57,8 @@ x-frontend-app: &frontend-app
   restart: unless-stopped
   volumes:
     - frontend-bundle:/usr/local/bundle
-    - node:/node_modules
     - rails_cache:/app/tmp/cache
     - assets:/app/public/assets
-    - ./frontend:/app
   tmpfs:
     - /tmp
     - /app/tmp/pids
@@ -418,7 +416,6 @@ volumes:
     driver: local
   rails_cache:
   assets:
-  node:
   reports-data:
     name: portal_reports
     driver: local
