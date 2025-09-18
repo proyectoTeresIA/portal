@@ -281,6 +281,8 @@ services:
   mgrep-ut:
     image: ontoportal/mgrep:0.0.2
     platform: linux/amd64
+    volumes:
+      - ./api/test/data/dictionary.txt:/srv/mgrep/dictionary/dictionary.txt
     healthcheck:
       test: ["CMD", "nc", "-z", "-v", "127.0.0.1", "55556"]
       start_period: 3s
