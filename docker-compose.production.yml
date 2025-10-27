@@ -257,13 +257,14 @@ services:
   solr-ut:
     image: solr:8
     volumes:
-      - ./api/test/solr/configsets:/configsets:ro
+      - ./api/config/solr:/configsets:ro
       - solr-data:/var/solr
     ports:
       - "8983:8983"
     command: >
       bash -c "precreate-core term_search_core1 /configsets/term_search
       && precreate-core prop_search_core1 /configsets/property_search
+      && precreate-core lexical_search_core1 /configsets/lexical_search
       && solr-foreground"
     healthcheck:
       test:

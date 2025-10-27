@@ -209,3 +209,6 @@ __marimo__/
 # Certificates
 *.crt
 *.key
+
+.bundle
+.vscode
