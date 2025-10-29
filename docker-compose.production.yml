@@ -257,13 +257,14 @@ services:
   solr-ut:
     image: solr:8
     volumes:
-      - ./api/test/solr/configsets:/configsets:ro
+      - ./api/config/solr:/configsets:ro
       - solr-data:/var/solr
     ports:
       - "8983:8983"
     command: >
       bash -c "precreate-core term_search_core1 /configsets/term_search
       && precreate-core prop_search_core1 /configsets/property_search
+      && precreate-core lexical_search_core1 /configsets/lexical_search
       && solr-foreground"
     healthcheck:
       test:
@@ -281,6 +282,8 @@ services:
   mgrep-ut:
     image: ontoportal/mgrep:0.0.2
     platform: linux/amd64
+    volumes:
+      - ./api/test/data/dictionary.txt:/srv/mgrep/dictionary/dictionary.txt
     healthcheck:
       test: ["CMD", "nc", "-z", "-v", "127.0.0.1", "55556"]
       start_period: 3s
