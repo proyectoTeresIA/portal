@@ -30,8 +30,6 @@ x-api-app: &api-app
   command: "bundle exec unicorn -p 9393 -o 0.0.0.0"
   restart: unless-stopped
   volumes:
-    - api-bundle:/srv/ontoportal/bundle
-    - ./api:/srv/ontoportal/ontologies_api
     - reports-data:/reports
   depends_on: &api-depends-on
     solr-ut:
@@ -46,7 +44,7 @@ x-frontend-app: &frontend-app
   command: bash -c "./bin/setup && ./bin/rails s -b 0.0.0.0"
   env_file:
     - .env
-  environment: &frontend-env
+  environment:
     RAILS_ENV: production
     NODE_ENV: production
     BUNDLE_WITHOUT: "development test"
@@ -410,9 +408,6 @@ volumes:
     driver: local
   agraph-data:
     name: portal_agraph
-    driver: local
-  api-bundle:
-    name: ontoportal_api_bundle
     driver: local
   frontend-bundle:
     name: ontoportal_frontend_bundle
