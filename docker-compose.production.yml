@@ -40,7 +40,8 @@ x-api-app: &api-app
       condition: service_healthy
 
 x-frontend-app: &frontend-app
-  image: ${FRONTEND_IMAGE:-ghcr.io/proyectoteresia/portal/frontend:latest}
+  build:
+    context: ./frontend
   command: bash -c "./bin/setup && ./bin/rails s -b 0.0.0.0"
   env_file:
     - .env
@@ -56,7 +57,6 @@ x-frontend-app: &frontend-app
   volumes:
     - frontend-bundle:/usr/local/bundle
     - rails_cache:/app/tmp/cache
-    - assets:/app/public/assets
   tmpfs:
     - /tmp
     - /app/tmp/pids
