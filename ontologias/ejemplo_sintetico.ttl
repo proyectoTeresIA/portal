@@ -1,0 +1,256 @@
+@prefix base: <http://myexample.com/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix etv: <https://w3id.org/def/easytv#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/3.0/lexinfo#> .
+@prefix lexvo: <http://lexvo.org/id/> .
+@prefix lv: <http://www.lexvo.org/id/iso639-3/> .
+@prefix ms: <http://w3id.org/meta-share/meta-share/> .
+@prefix olia: <http://purl.org/olia/olia.owl#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <https://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rml: <http://w3id.org/rml/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix termlex: <https://termlex.oeg.fi.upm.es/termlex/> .
+@prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> .
+@prefix wdt: <https://www.wikidata.org/wiki/Property:> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> .
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix rico: <https://www.ica.org/standards/RiC/ontology#> .
+
+
+<http://myexample.com/activitat_parlamentaria_resource> a ms:LexicalConceptualResource;
+  ms:domain <http://eurovoc.europa.eu/100142>, <http://eurovoc.europa.eu/100166>, <http://eurovoc.europa.eu/100167>;
+  ms:language <http://lexvo.org/id/iso639-3/cat>, <http://lexvo.org/id/iso639-3/eng>, <http://www.lexvo.org/page/iso639-3/csc>;
+  ms:resourceCreator <http://myexample.com/termcat_author>;
+  ms:resourceName "Activitat Parlamentaria";
+  ms:url <https://www.termcat.cat/Thor/files/diccionaris/cadfdlactivitatparlamentaria2aed.xml> .
+
+<http://myexample.com/termcat_author> a ms:Actor;
+  ms:isResourceCreatorOf <http://myexample.com/activitat_parlamentaria_resource>;
+  rdfs:label "TERMCAT" .
+
+<http://myexample.com/activitat_parlamentaria_resource_conceptset>
+  a ontolex:ConceptSet;
+  dct:source <http://myexample.com/activitat_parlamentaria_resource> .
+
+<http://myexample.com/C1> a ontolex:LexicalConcept;
+  dct:subject <http://myexample.com/organitzacio_i_funcionament_domain>;
+  skos:definition <http://myexample.com/C1_en_definition1>, <http://myexample.com/C1_ca_definition1>;
+  skos:note <http://myexample.com/C1_ca_note1>, <http://myexample.com/C1_ca_note2>;
+  skos:inScheme <http://myexample.com/activitat_parlamentaria_resource_conceptset>;
+  ontolex:isEvokedBy <http://myexample.com/C1_ca_absencia_noun_entry>,
+    <http://myexample.com/C1_en_absence_noun_entry>, <http://myexample.com/C1_es_ausencia_noun_entry>;
+  ontolex:lexicalizedSense <http://myexample.com/C1_ca_absencia_noun_sense>,
+    <http://myexample.com/C1_en_absence_noun_sense>, <http://myexample.com/C1_es_ausencia_noun_sense>,
+    <http://myexample.com/C1_fr_absence_noun_sense>, <http://myexample.com/C1_oc_absencia_noun_sense> ;
+  skos:broader <http://myexample.com/C2> ; 
+  skos:narrower <http://myexample.com/C2> ; 
+  skos:related <http://myexample.com/C2> ; 
+  owl:differentFrom <http://myexample.com/C2> ; 
+  lexinfo:antonym <http://myexample.com/C2> ; 
+  dct:isPartOf <http://myexample.com/C2> ; 
+  dct:hasPart <http://myexample.com/C2> ; 
+  dbo:capital <http://myexample.com/C2> ; 
+  dbo:currency <http://myexample.com/C2> ; 
+  dbo:causedBy <http://myexample.com/C2> ; 
+  rico:precedesInTime <http://myexample.com/C2> ; 
+  rico:followsInTime <http://myexample.com/C2> ; 
+  dul:hasLocation <http://myexample.com/C2> ;
+  dct:source <https://iate.europa.eu/entry/result/3584026/es-en>.
+
+<http://myexample.com/organitzacio_i_funcionament_domain> a skos:Concept ;
+  skos:prefLabel "Organització i funcionament" ;
+  skos:narrower <http://myexample.com/subdominio_domain> ;
+  skos:topConceptOf <http://myexample.com/activitat_parlamentaria_domainSchema> .
+
+<http://myexample.com/subdominio_domain> a skos:Concept ;
+  skos:prefLabel "subdominio" ;
+  skos:inSheme <http://myexample.com/activitat_parlamentaria_domainSchema> ;
+  skos:broader <http://myexample.com/organitzacio_i_funcionament_domain> ;
+  skos:narrower <http://myexample.com/subdominio2_domain> , <http://myexample.com/subdominio3_domain> .
+
+<http://myexample.com/subdominio2_domain> a skos:Concept ;
+  skos:prefLabel "subdominio2" ;
+  skos:inSheme <http://myexample.com/activitat_parlamentaria_domainSchema> ;
+  skos:broader <http://myexample.com/subdominio_domain> .
+
+<http://myexample.com/subdominio3_domain> a skos:Concept ;
+  skos:prefLabel "subdominio3" ;
+  skos:inSheme <http://myexample.com/activitat_parlamentaria_domainSchema> ;
+  skos:broader <http://myexample.com/subdominio_domain> .
+
+<http://myexample.com/tecnica_legislativa_domain> a skos:Concept ;
+  skos:prefLabel "Tecnica legislativa" ;
+  skos:topConceptOf <http://myexample.com/activitat_parlamentaria_domainSchema> .
+
+<http://myexample.com/activitat_parlamentaria_domainSchema> a skos:ConceptScheme ;
+  skos:hasTopConcept <http://myexample.com/organitzacio_i_funcionament_domain> ,
+    <http://myexample.com/tecnica_legislativa_domain> .
+
+<http://myexample.com/C1_en_definition1> a prov:Entity, termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/eng>;
+  rdf:value "definición en inglés";
+  prov:wasDerivedFrom <http://myexample.com/C1_en_definition1_ref1>, <http://myexample.com/C1_en_definition1_ref2> .
+
+<http://myexample.com/C1_en_definition1_ref1> a prov:Entity;
+  rdfs:label "Referencia a una ley";
+  prov:hasDerivation <http://myexample.com/C1_en_definition1> .
+
+<http://myexample.com/C1_en_definition1_ref2> a prov:Entity;
+  rdfs:label "Referencia a otra ley";
+  prov:hasDerivation <http://myexample.com/C1_en_definition1> .
+
+<http://myexample.com/C1_ca_definition1> a prov:Entity, termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/cat>;
+  rdf:value "definición en catalán";
+  prov:wasDerivedFrom <http://myexample.com/C1_ca_definition1_ref1> .
+
+<http://myexample.com/C1_ca_definition1_ref1> a prov:Entity ;
+  rdfs:label "Referencia a una ley" ;
+  prov:hasDerivation <http://myexample.com/C1_ca_definition1> .
+
+<http://myexample.com/C1_ca_note1> a prov:Entity, termlex:Note;
+  dct:language <http://lexvo.org/id/iso639-3/cat>;
+  rdfs:label "nota en catalán";
+  prov:wasDerivedFrom <http://myexample.com/C1_ca_note1_ref1>, <http://myexample.com/C1_ca_note1_ref2> .
+
+<http://myexample.com/C1_ca_note1_ref1> a prov:Entity ;
+  rdfs:label "Referencia a una normativa" ;
+  prov:hasDerivation <http://myexample.com/C1_ca_note1> .
+
+<http://myexample.com/C1_ca_note1_ref2> a prov:Entity;
+  rdfs:label "Referencia a una normativa";
+  prov:hasDerivation <http://myexample.com/C1_ca_note1> .
+
+<http://myexample.com/C1_ca_note2> a prov:Entity, termlex:Note ;
+  dct:language <http://lexvo.org/id/iso639-3/cat> ;
+  rdfs:label "nota en catalán" ;
+  prov:wasDerivedFrom <http://myexample.com/C1_ca_note2_ref1> .
+
+<http://myexample.com/C1_ca_note2_ref1> a prov:Entity ;
+  rdfs:label "normativa 3" ;
+  prov:hasDerivation <http://myexample.com/C1_ca_note2> .
+
+<http://myexample.com/C1_ca_absencia_noun_entry> a ontolex:LexicalEntry ,
+    prov:Entity ;
+  dct:language <http://lexvo.org/id/iso639-3/cat>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://myexample.com/C1>;
+  ontolex:lexicalForm <http://myexample.com/C1_ca_absencia_noun_feminine_form>, 
+    <http://myexample.com/C1_ca_absencia_noun_masculine_form> ;
+  etv:signedForm <http://myexample.com/C202_SC_interpellacio_interpellacio_signedForm> ;
+  ontolex:sense <http://myexample.com/C1_ca_absencia_noun_sense> ;
+  olia:hasValency olia:Transitive , olia:Intransitive ;
+  dbo:casNumber "2423948-94-9" ;
+  dbo:code "293949005" ;
+  prov:wasInfluencedBy <http://myexample.com/C1_ca_absencia_noun_entry_creation> , 
+    <http://myexample.com/C1_ca_absencia_noun_entry_modification> ;
+  prov:wasDerivedFrom <http://myexample.com/C1_ca_absencia_noun_entry_ref1> , <http://myexample.com/C1_ca_absencia_noun_entry_ref2> .
+
+<http://myexample.com/C1_ca_absencia_noun_entry_creation> a prov:Activity;
+  rdfs:label "creation" ;
+  prov:endedAtTime "2023-11-03T11:47:56.230408+00:00" ;
+  prov:influenced <http://myexample.com/C1_ca_absencia_noun_entry> ;
+  prov:hasDerivation <http://myexample.com/uzei_agent> .
+
+<http://myexample.com/C1_ca_absencia_noun_entry_modification> a prov:Activity;
+  rdfs:label "modification" ;
+  prov:endedAtTime "2023-11-03T11:47:56.230408+00:00" ;
+  prov:influenced <http://myexample.com/C1_ca_absencia_noun_entry> ;
+  prov:hasDerivation <http://myexample.com/uzei_agent> .
+
+<http://myexample.com/uzei_agent> a prov:Agent;
+  foaf:name "UZEI" ;
+  foaf:mbox "uzei@uzei.eus" ;
+  prov:wasAssociatedFor <http://myexample.com/C1_ca_absencia_noun_entry_creation> ,
+    <http://myexample.com/C1_ca_absencia_noun_entry_modification> .
+
+<http://myexample.com/C1_ca_absencia_noun_entry_ref1> a prov:Entity;
+  rdfs:label "Un artículo" ;
+  prov:hasDerivation <http://myexample.com/C1_ca_absencia_noun_entry> .
+
+<http://myexample.com/C1_ca_absencia_noun_entry_ref2> a prov:Entity;
+  rdfs:label "https://boe.es/boe/dias/2025/11/01/pdfs/BOE-A-2025-22023.pdf" ;
+  prov:hasDerivation <http://myexample.com/C1_ca_absencia_noun_entry> .
+
+<http://myexample.com/C1_ca_absencia_noun_feminine_form> a ontolex:Form ;
+  lexinfo:gender lexinfo:feminine ;
+  lexinfo:number lexinfo:singular ;
+  ontolex:writtenRep "absència" .
+
+<http://myexample.com/C1_ca_absencia_noun_masculine_form> a ontolex:Form ;
+  lexinfo:gender lexinfo:masculine ;
+  lexinfo:number lexinfo:plural ;
+  ontolex:writtenRep "absèncios" .
+
+<http://myexample.com/C202_SC_interpellacio_interpellacio_signedForm> a etv:signedForm;
+  etv:signedRep <http://myexample.com/C202_SC_interpellacio_video> .
+
+<http://myexample.com/C202_SC_interpellacio_video> a etv:Video;
+  etv:url <https://youtu.be/ToM2TZWaxEQ> .
+
+<http://myexample.com/C1_ca_absencia_noun_sense> a ontolex:LexicalSense ;
+  ontolex:isLexicalizedSenseOf <http://myexample.com/C1> ;
+  ontolex:isSenseOf <http://myexample.com/C1_ca_absencia_noun_entry> ;
+  vartrans:translation <http://myexample.com/C1_en_absence_noun_sense> ;
+  lexinfo:synonym <http://myexample.com/C1_ca_algo_noun_sense> ;
+  termlex:reliabilityCode <https://termlex.oeg.fi.upm.es/termlex#3> ;
+  lexinfo:normativeAuthorization lexinfo:preferred ;
+  lexinfo:termType lexinfo:termEntry ;
+  lexicog:usageExample <http://myexample.com/C1_ca_absencia_noun_example1> ,
+    <http://myexample.com/C1_ca_absencia_noun_example2> ;
+  termlex:usage <http://myexample.com/C1_ca_absencia_noun_usagenote1> , <http://myexample.com/C1_ca_absencia_noun_usagenote2> .
+
+<http://myexample.com/C1_ca_absencia_noun_example1> a lexicog:UsageExample,
+    prov:Entity;
+  dct:source base:C1_ca_absencia_noun_example1_ref ;
+  dct:language <http://lexvo.org/id/iso639-3/cat> ;
+  rdf:value "ejemplo de uso" .
+
+<http://myexample.com/C1_ca_absencia_noun_example1_ref> a prov:Entity ;
+  prov:hasDerivation <http://myexample.com/C1_ca_absencia_noun_example1> ;
+  rdf:value "https://boe.es/boe/dias/2025/11/01/pdfs/BOE-A-2025-22023.pdf" .
+
+<http://myexample.com/C1_ca_absencia_noun_example2> a lexicog:UsageExample,
+    prov:Entity;
+  dct:source base:C1_ca_absencia_noun_example2_ref ;
+  dct:language <http://lexvo.org/id/iso639-3/cat> ;
+  rdf:value "otro ejemplo de uso" .
+
+<http://myexample.com/C1_ca_absencia_noun_example2_ref> a prov:Entity ;
+  prov:hasDerivation <http://myexample.com/C1_ca_absencia_noun_example2> ;
+  rdf:value "un recurso diferente" .
+
+<http://myexample.com/C1_ca_absencia_noun_usagenote1> a prov:Entity,
+    termlex:Usage;
+  dct:language <http://lexvo.org/id/iso639-3/cat>;
+  dct:source <http://myexample.com/C1_ca_absencia_noun_usagenote1_ref1> ;
+  rdf:value "nota de uso en catalán" .
+
+<http://myexample.com/C1_ca_absencia_noun_usagenote1_ref1> a prov:Entity;
+  prov:hasDerivation <http://myexample.com/C1_ca_absencia_noun_usagenote1>;
+  rdf:value "DGT-ES-TERM" .
+
+<http://myexample.com/C1_ca_absencia_noun_usagenote2> a prov:Entity,
+    termlex:Usage;
+  dct:language <http://lexvo.org/id/iso639-3/cat>;
+  dct:source <http://myexample.com/C1_ca_absencia_noun_usagenote2_ref1> ,
+   <http://myexample.com/C1_ca_absencia_noun_usagenote2_ref2> ;
+  rdf:value "nota sobre el registro" .
+
+<http://myexample.com/C1_ca_absencia_noun_usagenote2_ref1> a prov:Entity;
+  prov:hasDerivation <http://myexample.com/C1_ca_absencia_noun_usagenote2>;
+  rdf:value "https://boe.es/boe/dias/2025/11/01/pdfs/BOE-A-2025-22023.pdf" .
+
+<http://myexample.com/C1_ca_absencia_noun_usagenote2_ref2> a prov:Entity;
+  prov:hasDerivation <http://myexample.com/C1_ca_absencia_noun_usagenote2>;
+  rdf:value "otra referencia" .
+
+<http://myexample.com/C2> a ontolex:LexicalConcept;
+  skos:inScheme <http://myexample.com/activitat_parlamentaria_resource_conceptset> .
