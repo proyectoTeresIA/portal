@@ -3,14 +3,15 @@ x-api-app: &api-app
     context: ./api
     args:
       RUBY_VERSION: "3.1"
+      INSTALL_DEPS: "false"
   env_file:
     - .env
   environment: &api-env
     BUNDLE_PATH: /srv/ontoportal/bundle
     BUNDLE_APP_CONFIG: /srv/ontoportal/ontologies_api/.bundle
+    ONTLD_PATH: /srv/ontologies_linked_data
     COVERAGE: "true"
     OVERRIDE_CONFIG: "true"
-    ONTLD_PATH: /srv/ontologies_linked_data
     API_KEY: ${API_KEY}
     GOO_REDIS_HOST: redis-ut
     REDIS_GOO_CACHE_HOST: redis-ut

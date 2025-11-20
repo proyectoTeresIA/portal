@@ -8,6 +8,7 @@ x-api-app: &api-app
     BUNDLE_WITHOUT: "development test"
 
     # App
+    RACK_ENV: production
     COVERAGE: "false"
     OVERRIDE_CONFIG: "true"
     API_KEY: ${API_KEY}
@@ -23,14 +24,17 @@ x-api-app: &api-app
     ANNOTATOR_REDIS_PORT: 6379
     SOLR_TERM_SEARCH_URL: http://solr-ut:8983/solr/term_search_core1
     SOLR_PROP_SEARCH_URL: http://solr-ut:8983/solr/prop_search_core1
+    SOLR_LEXICAL_SEARCH_URL: http://solr-ut:8983/solr/lexical_search_core1
     MGREP_HOST: mgrep-ut
     MGREP_PORT: 55556
     REPORT_PATH: /reports/ontologies_report.json
+    REPOSITORY_FOLDER: /srv/ontoportal/data/repository
     DATADIR: /
   command: "bundle exec unicorn -p 9393 -o 0.0.0.0"
   restart: unless-stopped
   volumes:
     - reports-data:/reports
+    - repository-data:/srv/ontoportal/data/repository
   depends_on: &api-depends-on
     solr-ut:
       condition: service_healthy
@@ -40,8 +44,7 @@ x-api-app: &api-app
       condition: service_healthy
 
 x-frontend-app: &frontend-app
-  build:
-    context: ./frontend
+  image: ${FRONTEND_IMAGE:-ghcr.io/proyectoteresia/portal/frontend:latest}
   command: bash -c "./bin/setup && ./bin/rails s -b 0.0.0.0"
   env_file:
     - .env
@@ -416,4 +419,7 @@ volumes:
   assets:
   reports-data:
     name: portal_reports
+    driver: local
+  repository-data:
+    name: portal_repository
     driver: local
