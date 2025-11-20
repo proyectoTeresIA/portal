@@ -85,6 +85,8 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./api
+          args: |
+            INSTALL_DEPS=true
           push: true
           tags: |
             ${{ steps.prep.outputs.api_tags }}
