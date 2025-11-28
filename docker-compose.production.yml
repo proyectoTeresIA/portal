@@ -150,7 +150,6 @@ services:
     command: bash /srv/ontoportal/ontologies_api/start-ncbo-cron.sh
     environment:
       <<: *api-env
-      REST_URL_PREFIX: ${REST_URL_PREFIX:-http://nginx/api/}
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
