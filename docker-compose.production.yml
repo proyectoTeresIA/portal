@@ -148,7 +148,7 @@ services:
   # NcboCron Worker Service for processing ontologies (AG)
   ncbo-cron-worker:
     <<: *api-app
-    command: bash /srv/ontoportal/ontologies_api/start-ncbo-cron.sh
+    command: bash /srv/ontoportal/ontologies_api/scripts/start-ncbo-cron.sh
     environment:
       <<: *api-env
       GOO_BACKEND_NAME: ag
