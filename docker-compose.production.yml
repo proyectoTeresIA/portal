@@ -35,6 +35,7 @@ x-api-app: &api-app
   volumes:
     - reports-data:/reports
     - repository-data:/srv/ontoportal/data/repository
+    - mgrep-dictionary:/srv/ontoportal/ontologies_api/test/data
   depends_on: &api-depends-on
     solr-ut:
       condition: service_healthy
@@ -147,7 +148,7 @@ services:
   # NcboCron Worker Service for processing ontologies (AG)
   ncbo-cron-worker:
     <<: *api-app
-    command: bash /srv/ontoportal/ontologies_api/start-ncbo-cron.sh
+    command: bash /srv/ontoportal/ontologies_api/scripts/start-ncbo-cron.sh
     environment:
       <<: *api-env
       GOO_BACKEND_NAME: ag
@@ -283,7 +284,7 @@ services:
     image: ontoportal/mgrep:0.0.2
     platform: linux/amd64
     volumes:
-      - ./api/test/data/dictionary.txt:/srv/mgrep/dictionary/dictionary.txt
+      - mgrep-dictionary:/srv/mgrep/dictionary
     healthcheck:
       test: ["CMD", "nc", "-z", "-v", "127.0.0.1", "55556"]
       start_period: 3s
@@ -421,4 +422,7 @@ volumes:
     driver: local
   repository-data:
     name: portal_repository
+    driver: local
+  mgrep-dictionary:
+    name: portal_mgrep_dictionary
     driver: local
