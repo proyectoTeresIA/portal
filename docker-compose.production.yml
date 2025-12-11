@@ -97,7 +97,7 @@ services:
   # NcboCron Worker Service for processing ontologies (4store)
   ncbo-cron-worker-4store:
     <<: *api-app
-    command: bash /srv/ontoportal/ontologies_api/start-ncbo-cron.sh
+    command: bash /srv/ontoportal/ontologies_api/scripts/start-ncbo-cron.sh
     environment:
       <<: *api-env
       GOO_BACKEND_NAME: 4store
