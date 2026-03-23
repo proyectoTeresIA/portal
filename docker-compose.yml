@@ -32,7 +32,7 @@ x-api-app: &api-app
   volumes:
     - api-bundle:/srv/ontoportal/bundle
     - ./api:/srv/ontoportal/ontologies_api
-    - /home/markus/librairy/ontologies_linked_data:/srv/ontologies_linked_data:ro
+    - ./ontologies_linked_data:/srv/ontologies_linked_data:ro
   depends_on: &api-depends-on
     solr-ut:
       condition: service_healthy
@@ -81,15 +81,16 @@ services:
       <<: *api-env
       GOO_BACKEND_NAME: 4store
       GOO_PORT: 9000
-      GOO_HOST: 4store-ut
+      GOO_HOST: store4
       GOO_PATH_QUERY: /sparql/
       GOO_PATH_DATA: /data/
       GOO_PATH_UPDATE: /update/
+      BUNDLE_FROZEN: false
     profiles:
       - 4store
     depends_on:
       <<: *api-depends-on
-      4store-ut:
+      store4:
         condition: service_started
     networks:
       internal:
@@ -110,7 +111,7 @@ services:
       <<: *api-env
       GOO_BACKEND_NAME: 4store
       GOO_PORT: 9000
-      GOO_HOST: 4store-ut
+      GOO_HOST: store4
       GOO_PATH_QUERY: /sparql/
       GOO_PATH_DATA: /data/
       GOO_PATH_UPDATE: /update/
@@ -118,7 +119,7 @@ services:
       - 4store
     depends_on:
       <<: *api-depends-on
-      4store-ut:
+      store4:
         condition: service_started
       api:
         condition: service_healthy
@@ -265,7 +266,7 @@ services:
     networks:
       - internal
 
-  4store-ut:
+  store4:
     image: bde2020/4store
     platform: linux/amd64
     ports:
