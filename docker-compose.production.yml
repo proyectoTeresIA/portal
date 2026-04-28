@@ -46,6 +46,16 @@ x-api-app: &api-app
       condition: service_healthy
     mgrep-ut:
       condition: service_healthy
+  networks:
+    internal:
+      aliases:
+        - api
+  healthcheck:
+    test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
+    interval: 30s
+    timeout: 10s
+    retries: 5
+    start_period: 60s
 
 x-frontend-app: &frontend-app
   image: ${FRONTEND_IMAGE:-ghcr.io/proyectoteresia/portal/frontend:latest}
@@ -67,6 +77,12 @@ x-frontend-app: &frontend-app
   tmpfs:
     - /tmp
     - /app/tmp/pids
+  healthcheck:
+    test: ["CMD-SHELL", "curl -f http://localhost:3000/ || exit 1"]
+    interval: 30s
+    timeout: 10s
+    retries: 5
+    start_period: 60s
 
 services:
   # API Services (4store)
@@ -86,16 +102,6 @@ services:
       <<: *api-depends-on
       4store-ut:
         condition: service_started
-    networks:
-      internal:
-        aliases:
-          - api
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
 
   # NcboCron Worker Service for processing ontologies (4store)
   ncbo-cron-worker-4store:
@@ -137,16 +143,6 @@ services:
       <<: *api-depends-on
       agraph-ut:
         condition: service_healthy
-    networks:
-      internal:
-        aliases:
-          - api
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
 
   # NcboCron Worker Service for processing ontologies (AG)
   ncbo-cron-worker:

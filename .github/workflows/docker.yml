@@ -106,3 +106,18 @@ jobs:
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Deploy to Production
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          port: ${{ secrets.VM_PORT }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /app/portal
+
+            docker compose -f docker-compose.production.yml --profile agraph pull
+            docker compose -f docker-compose.production.yml --profile agraph rollout api-agraph frontend-agraph
+
+            docker image prune -f
