@@ -2,7 +2,9 @@ x-api-app: &api-app
   image: ${API_IMAGE:-ghcr.io/proyectoteresia/portal/api:latest}
   env_file:
     - .env
-  environment: &api-env # Ruby/Bundler
+  environment:
+    # Ruby/Bundler
+    &api-env
     BUNDLE_PATH: /srv/ontoportal/bundle
     BUNDLE_APP_CONFIG: /srv/ontoportal/ontologies_api/.bundle
     BUNDLE_WITHOUT: "development test"
@@ -36,6 +38,7 @@ x-api-app: &api-app
     - reports-data:/reports
     - repository-data:/srv/ontoportal/data/repository
     - mgrep-dictionary:/srv/ontoportal/ontologies_api/test/data
+    - api-logs:/srv/ontoportal/ontologies_api/log
   depends_on: &api-depends-on
     solr-ut:
       condition: service_healthy
@@ -43,6 +46,16 @@ x-api-app: &api-app
       condition: service_healthy
     mgrep-ut:
       condition: service_healthy
+  networks:
+    internal:
+      aliases:
+        - api
+  healthcheck:
+    test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
+    interval: 30s
+    timeout: 10s
+    retries: 5
+    start_period: 60s
 
 x-frontend-app: &frontend-app
   image: ${FRONTEND_IMAGE:-ghcr.io/proyectoteresia/portal/frontend:latest}
@@ -64,6 +77,12 @@ x-frontend-app: &frontend-app
   tmpfs:
     - /tmp
     - /app/tmp/pids
+  healthcheck:
+    test: ["CMD-SHELL", "curl -f http://localhost:3000/ || exit 1"]
+    interval: 30s
+    timeout: 10s
+    retries: 5
+    start_period: 60s
 
 services:
   # API Services (4store)
@@ -83,16 +102,6 @@ services:
       <<: *api-depends-on
       4store-ut:
         condition: service_started
-    networks:
-      internal:
-        aliases:
-          - api
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
 
   # NcboCron Worker Service for processing ontologies (4store)
   ncbo-cron-worker-4store:
@@ -134,16 +143,6 @@ services:
       <<: *api-depends-on
       agraph-ut:
         condition: service_healthy
-    networks:
-      internal:
-        aliases:
-          - api
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
 
   # NcboCron Worker Service for processing ontologies (AG)
   ncbo-cron-worker:
@@ -247,9 +246,8 @@ services:
     volumes:
       - 4store-data:/var/lib/4store
     command: >
-      bash -c "4s-backend-setup --segments 4 ontoportal_kb
-      && 4s-backend ontoportal_kb
-      && 4s-httpd -D -s-1 -p 9000 ontoportal_kb"
+      bash -c "4s-backend-setup --segments 4 ontoportal_kb && 4s-backend
+      ontoportal_kb && 4s-httpd -D -s-1 -p 9000 ontoportal_kb"
     profiles:
       - 4store
     networks:
@@ -263,15 +261,17 @@ services:
     ports:
       - "8983:8983"
     command: >
-      bash -c "precreate-core term_search_core1 /configsets/term_search
-      && precreate-core prop_search_core1 /configsets/property_search
-      && precreate-core lexical_search_core1 /configsets/lexical_search
-      && solr-foreground"
+      bash -c "precreate-core term_search_core1 /configsets/term_search &&
+      precreate-core prop_search_core1 /configsets/property_search &&
+      precreate-core lexical_search_core1 /configsets/lexical_search &&
+      solr-foreground"
     healthcheck:
       test:
         [
           "CMD-SHELL",
-          'curl -sf http://localhost:8983/solr/term_search_core1/admin/ping?wt=json | grep -iq ''"status":"OK"}'' || exit 1',
+          "curl -sf
+            http://localhost:8983/solr/term_search_core1/admin/ping?wt=json |
+            grep -iq '\"status\":\"OK\"}' || exit 1",
         ]
       start_period: 5s
       interval: 10s
@@ -305,10 +305,9 @@ services:
       - agraph-data:/agraph/data
     command: >
       bash -c "/agraph/bin/agraph-control --config /agraph/etc/agraph.cfg start
-      ; agtool repos create ontoportal_test
-      ; agtool users add anonymous
-      ; agtool users grant anonymous root:ontoportal_test:rw
-      ; tail -f /agraph/data/agraph.log"
+      ; agtool repos create ontoportal_test ; agtool users add anonymous ;
+      agtool users grant anonymous root:ontoportal_test:rw ; tail -f
+      /agraph/data/agraph.log"
     healthcheck:
       test: ["CMD-SHELL", "agtool storage-report ontoportal_test || exit 1"]
       start_period: 30s
@@ -339,15 +338,10 @@ services:
       - ./frontend/db/init-mysql.sh:/docker-entrypoint-initdb.d/init-mysql.sh
     command: >
       --default-authentication-plugin=mysql_native_password
-      --innodb-buffer-pool-size=256M
-      --innodb-redo-log-capacity=134217728
-      --innodb-flush-log-at-trx-commit=2
-      --innodb-flush-method=O_DIRECT
-      --max-connections=200
-      --slow-query-log=1
-      --long-query-time=2
-      --binlog-expire-logs-seconds=604800
-      --max-binlog-size=100M
+      --innodb-buffer-pool-size=256M --innodb-redo-log-capacity=134217728
+      --innodb-flush-log-at-trx-commit=2 --innodb-flush-method=O_DIRECT
+      --max-connections=200 --slow-query-log=1 --long-query-time=2
+      --binlog-expire-logs-seconds=604800 --max-binlog-size=100M
     restart: unless-stopped
     healthcheck:
       test:
@@ -390,7 +384,8 @@ services:
       - ./nginx/certs:/etc/letsencrypt
       - ./nginx/www:/var/www/certbot
     entrypoint: sh
-    command: -c "while :; do certbot renew --webroot -w /var/www/certbot --quiet --deploy-hook 'nginx -s reload || true'; sleep 12h; done"
+    command: -c "while :; do certbot renew --webroot -w /var/www/certbot --quiet
+      --deploy-hook 'nginx -s reload || true'; sleep 12h; done"
 
 networks:
   internal:
@@ -425,4 +420,7 @@ volumes:
     driver: local
   mgrep-dictionary:
     name: portal_mgrep_dictionary
+    driver: local
+  api-logs:
+    name: portal_api_logs
     driver: local
