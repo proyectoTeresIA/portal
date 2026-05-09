@@ -1,6 +1,8 @@
 [submodule "frontend"]
 	path = frontend
 	url = https://github.com/proyectoTeresIA/ontoportal_ui.git
+	branch = ia
 [submodule "api"]
 	path = api
 	url = https://github.com/proyectoTeresIA/ontoportal_api.git
+	branch = ia
