@@ -180,6 +180,25 @@ services:
     restart: unless-stopped
     profiles:
       - 4store
+    depends_on:
+      api:
+        condition: service_healthy
+    volumes:
+      - ./nginx/certs:/etc/nginx/certs:ro
+      - ./nginx/www:/var/www/certbot:ro
+
+  nginx-agraph:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - internal
+    restart: unless-stopped
+    profiles:
+      - 4store
       - agraph
     depends_on:
       api-agraph:
