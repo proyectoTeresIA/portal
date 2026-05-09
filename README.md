@@ -60,7 +60,7 @@ Cada hito cuenta con su propia **memoria técnica**, siguiendo una estructura es
 
 ## Despliegue y Entorno de Desarrollo (rama ia)
 
-Desde la rama `ia` se usa un unico fichero `docker-compose.yml`, sin perfiles, con AllegroGraph como backend RDF y un proxy Nginx interno listo para trabajar bajo un prefijo de ruta.
+Desde la rama `ia` se usa un unico fichero `docker-compose.yml`, sin perfiles, con **Apache Jena Fuseki** como backend RDF (libre, multi-arch, sin QEMU) y un proxy Nginx interno listo para trabajar bajo un prefijo de ruta.
 
 Stack incluido:
 
@@ -68,7 +68,7 @@ Stack incluido:
 - Frontend (Rails)
 - Worker `ncbo-cron`
 - Nginx
-- AllegroGraph
+- Apache Jena Fuseki (RDF triple store)
 - Solr
 - Redis
 - Mgrep
@@ -101,9 +101,9 @@ Valores clave en `.env`:
 
 - `API_KEY`: clave admin del portal
 - `PORTAL_BASE_PATH`: prefijo de ruta (por defecto `/teresia-portal`)
-- `PUBLIC_UI_URL`: URL publica base (por defecto `http://localhost`)
-- `EXTERNAL_API_URL`: URL publica de API con prefijo (por defecto `http://localhost/teresia-portal/api`)
-- `PORTAL_HTTP_PORT`: puerto HTTP expuesto por el contenedor Nginx (por defecto `80`)
+- `PUBLIC_UI_URL`: URL publica base (por defecto `http://localhost:8080`)
+- `EXTERNAL_API_URL`: URL publica de API con prefijo (por defecto `http://localhost:8080/teresia-portal/api`)
+- `PORTAL_HTTP_PORT`: puerto HTTP expuesto por el contenedor Nginx (por defecto `8080`)
 
 ### Arranque local
 
@@ -125,8 +125,8 @@ docker compose restart api frontend
 
 Acceso local:
 
-- Portal: http://localhost/teresia-portal/
-- API publica (via proxy): http://localhost/teresia-portal/api
+- Portal: http://localhost:8080/teresia-portal/
+- API publica (via proxy): http://localhost:8080/teresia-portal/api
 
 ### Uso en servidor remoto detras de Nginx institucional
 

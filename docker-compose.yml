@@ -49,7 +49,7 @@ x-frontend-app: &frontend-app
       RAILS_ENV: ${RAILS_ENV:-development}
       NODE_ENV: ${NODE_ENV:-development}
       BUNDLE_WITHOUT: ${BUNDLE_WITHOUT:-production test}
-  command: bash -c "./bin/setup && ./bin/rails s -b 0.0.0.0"
+  command: bash -c "yarn install && yarn build && ./bin/setup && ./bin/rails s -b 0.0.0.0"
   env_file:
     - .env
   tty: true
@@ -86,15 +86,15 @@ services:
     environment:
       <<: *api-env
       BUNDLE_FROZEN: false
-      GOO_BACKEND_NAME: ag
-      GOO_PORT: 10035
-      GOO_HOST: agraph-ut
-      GOO_PATH_QUERY: /repositories/ontoportal_test
-      GOO_PATH_DATA: /repositories/ontoportal_test/statements
-      GOO_PATH_UPDATE: /repositories/ontoportal_test/statements
+      GOO_BACKEND_NAME: fuseki
+      GOO_PORT: 3030
+      GOO_HOST: fuseki-ut
+      GOO_PATH_QUERY: /ontoportal_test/query
+      GOO_PATH_DATA: /ontoportal_test/data
+      GOO_PATH_UPDATE: /ontoportal_test/update
     depends_on:
       <<: *api-depends-on
-      agraph-ut:
+      fuseki-ut:
         condition: service_healthy
     networks:
       internal:
@@ -113,15 +113,15 @@ services:
     environment:
       <<: *api-env
       BUNDLE_FROZEN: false
-      GOO_BACKEND_NAME: ag
-      GOO_PORT: 10035
-      GOO_HOST: agraph-ut
-      GOO_PATH_QUERY: /repositories/ontoportal_test
-      GOO_PATH_DATA: /repositories/ontoportal_test/statements
-      GOO_PATH_UPDATE: /repositories/ontoportal_test/statements
+      GOO_BACKEND_NAME: fuseki
+      GOO_PORT: 3030
+      GOO_HOST: fuseki-ut
+      GOO_PATH_QUERY: /ontoportal_test/query
+      GOO_PATH_DATA: /ontoportal_test/data
+      GOO_PATH_UPDATE: /ontoportal_test/update
     depends_on:
       <<: *api-depends-on
-      agraph-ut:
+      fuseki-ut:
         condition: service_healthy
       api:
         condition: service_healthy
@@ -133,7 +133,7 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     ports:
-      - "${PORTAL_HTTP_PORT:-80}:80"
+      - "${PORTAL_HTTP_PORT:-8080}:80"
     volumes:
       - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
     depends_on:
@@ -157,16 +157,8 @@ services:
       - "host.docker.internal:host-gateway"
     depends_on:
       <<: *frontend-depends-on
-      frontend-node:
-        condition: service_started
       api:
         condition: service_healthy
-
-  frontend-node:
-    <<: *frontend-app
-    command: bash -c "yarn install && yarn build --watch"
-    networks:
-      - internal
 
   redis-ut:
     image: redis
@@ -217,28 +209,18 @@ services:
     networks:
       - internal
 
-  agraph-ut:
-    image: franzinc/agraph:v8.1.0
-    platform: linux/amd64
+  fuseki-ut:
+    image: stain/jena-fuseki
     environment:
-      - AGRAPH_SUPER_USER=test
-      - AGRAPH_SUPER_PASSWORD=xyzzy
-    shm_size: 1g
+      ADMIN_PASSWORD: xyzzy
+      FUSEKI_DATASET_1: ontoportal_test
     volumes:
-      - agraph-data:/agraph/data
-    ports:
-      - "10035:10035"
-    command: >
-      bash -c "/agraph/bin/agraph-control --config /agraph/etc/agraph.cfg start
-      ; agtool repos create ontoportal_test
-      ; agtool users add anonymous
-      ; agtool users grant anonymous root:ontoportal_test:rw
-      ; tail -f /agraph/data/agraph.log"
+      - fuseki-data:/fuseki
     healthcheck:
-      test: ["CMD-SHELL", "agtool storage-report ontoportal_test || exit 1"]
-      start_period: 30s
-      interval: 20s
-      timeout: 10s
+      test: ["CMD-SHELL", "curl -sf http://localhost:3030/$$/ping || exit 1"]
+      start_period: 20s
+      interval: 15s
+      timeout: 5s
       retries: 10
     networks:
       - internal
@@ -247,8 +229,6 @@ services:
     image: "mysql:8.0"
     networks:
       - internal
-    ports:
-      - "3306:3306"
     environment:
       MYSQL_USER: ${MYSQL_USER:-bp_user}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-changeme}
@@ -311,6 +291,6 @@ volumes:
   solr-data:
     name: portal_solr_persistent
     driver: local
-  agraph-data:
-    name: portal_agraph_persistent
+  fuseki-data:
+    name: portal_fuseki_persistent
     driver: local
