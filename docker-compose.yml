@@ -68,7 +68,12 @@ x-frontend-app: &frontend-app
     RAILS_ENV: development
     BUNDLE_WITHOUT: ""
     BUNDLE_PATH: /usr/local/bundle
+    UI_URL: http://localhost
+    UI_BASE_PATH: /ontoportal
     API_KEY: ${API_KEY}
+    API_URL: http://portal-api:9393
+    REST_URL_PREFIX: http://portal-api:9393/
+    EXTERNAL_API_URL: http://localhost/ontoportal/api
     DB_HOST: db
     MEMCACHE_SERVERS: "cache:11211"
   tmpfs:
@@ -97,7 +102,8 @@ services:
     networks:
       internal:
         aliases:
-          - api
+          - portal-api
+          - api-agraph
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
       interval: 30s
@@ -132,6 +138,7 @@ services:
     <<: *api-app
     environment:
       <<: *api-env
+      BUNDLE_FROZEN: false
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -147,7 +154,8 @@ services:
     networks:
       internal:
         aliases:
-          - api
+          - portal-api
+          - api-agraph
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
       interval: 30s
@@ -161,6 +169,7 @@ services:
     command: bash /srv/ontoportal/ontologies_api/scripts/start-ncbo-cron.sh
     environment:
       <<: *api-env
+      BUNDLE_FROZEN: false
       GOO_BACKEND_NAME: ag
       GOO_PORT: 10035
       GOO_HOST: agraph-ut
@@ -201,7 +210,8 @@ services:
     networks:
       internal:
         aliases:
-          - frontend
+          - portal-frontend
+          - frontend-agraph
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -220,7 +230,8 @@ services:
     networks:
       internal:
         aliases:
-          - frontend
+          - portal-frontend
+          - frontend-agraph
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -455,7 +466,12 @@ services:
       - internal
 
 networks:
+  default:
+    external: true
+    name: ${COMPOSE_EXTERNAL_NETWORK:-teresia-shared}
   internal:
+    external: true
+    name: ${COMPOSE_EXTERNAL_NETWORK:-teresia-shared}
   external:
 
 volumes:
