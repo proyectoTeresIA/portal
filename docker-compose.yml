@@ -27,9 +27,7 @@ x-api-app: &api-app
     MGREP_HOST: mgrep-ut
     MGREP_PORT: 55556
   stdin_open: true
-  command: bash -lc "git config --global --add safe.directory
-    /srv/ontologies_linked_data || true; bundle check || bundle install &&
-    bundle exec unicorn -p 9393 -o 0.0.0.0"
+  command: bash -lc "git config --global --add safe.directory /srv/ontologies_linked_data || true; bundle check || bundle install && bundle exec unicorn -p 9393 -o 0.0.0.0"
   tty: true
   volumes:
     - api-bundle:/srv/ontoportal/bundle
@@ -42,6 +40,7 @@ x-api-app: &api-app
       condition: service_healthy
     mgrep-ut:
       condition: service_healthy
+  restart: unless-stopped
 
 x-frontend-app: &frontend-app
   build:
@@ -68,73 +67,21 @@ x-frontend-app: &frontend-app
     RAILS_ENV: development
     BUNDLE_WITHOUT: ""
     BUNDLE_PATH: /usr/local/bundle
-    UI_URL: http://localhost
-    UI_BASE_PATH: /ontoportal
+    UI_URL: ${PUBLIC_UI_URL:-http://localhost}
+    UI_BASE_PATH: ${PORTAL_BASE_PATH:-/teresia-portal}
     API_KEY: ${API_KEY}
     API_URL: http://portal-api:9393
     REST_URL_PREFIX: http://portal-api:9393/
-    EXTERNAL_API_URL: http://localhost/ontoportal/api
+    EXTERNAL_API_URL: ${EXTERNAL_API_URL:-http://localhost/teresia-portal/api}
     DB_HOST: db
     MEMCACHE_SERVERS: "cache:11211"
   tmpfs:
     - /tmp
     - /app/tmp/pids
+  restart: unless-stopped
 
 services:
-  # API Services
   api:
-    <<: *api-app
-    environment:
-      <<: *api-env
-      GOO_BACKEND_NAME: 4store
-      GOO_PORT: 9000
-      GOO_HOST: store4
-      GOO_PATH_QUERY: /sparql/
-      GOO_PATH_DATA: /data/
-      GOO_PATH_UPDATE: /update/
-      BUNDLE_FROZEN: false
-    profiles:
-      - 4store
-    depends_on:
-      <<: *api-depends-on
-      store4:
-        condition: service_started
-    networks:
-      internal:
-        aliases:
-          - portal-api
-          - api-agraph
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
-
-  # NcboCron Worker Service for processing ontologies (4store)
-  ncbo-cron-worker-4store:
-    <<: *api-app
-    command: bash /srv/ontoportal/ontologies_api/scripts/start-ncbo-cron.sh
-    environment:
-      <<: *api-env
-      GOO_BACKEND_NAME: 4store
-      GOO_PORT: 9000
-      GOO_HOST: store4
-      GOO_PATH_QUERY: /sparql/
-      GOO_PATH_DATA: /data/
-      GOO_PATH_UPDATE: /update/
-    profiles:
-      - 4store
-    depends_on:
-      <<: *api-depends-on
-      store4:
-        condition: service_started
-      api:
-        condition: service_healthy
-    networks:
-      - internal
-
-  api-agraph:
     <<: *api-app
     environment:
       <<: *api-env
@@ -145,8 +92,6 @@ services:
       GOO_PATH_QUERY: /repositories/ontoportal_test
       GOO_PATH_DATA: /repositories/ontoportal_test/statements
       GOO_PATH_UPDATE: /repositories/ontoportal_test/statements
-    profiles:
-      - agraph
     depends_on:
       <<: *api-depends-on
       agraph-ut:
@@ -155,7 +100,6 @@ services:
       internal:
         aliases:
           - portal-api
-          - api-agraph
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:9393/ || exit 1"]
       interval: 30s
@@ -163,7 +107,6 @@ services:
       retries: 5
       start_period: 60s
 
-  # NcboCron Worker Service for processing ontologies
   ncbo-cron-worker:
     <<: *api-app
     command: bash /srv/ontoportal/ontologies_api/scripts/start-ncbo-cron.sh
@@ -176,13 +119,11 @@ services:
       GOO_PATH_QUERY: /repositories/ontoportal_test
       GOO_PATH_DATA: /repositories/ontoportal_test/statements
       GOO_PATH_UPDATE: /repositories/ontoportal_test/statements
-    profiles:
-      - agraph
     depends_on:
       <<: *api-depends-on
       agraph-ut:
         condition: service_healthy
-      api-agraph:
+      api:
         condition: service_healthy
     networks:
       - internal
@@ -192,17 +133,18 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "${PORTAL_HTTP_PORT:-80}:80"
     volumes:
       - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      api:
+        condition: service_healthy
+      frontend:
+        condition: service_started
     networks:
       - internal
     restart: unless-stopped
-    profiles:
-      - 4store
-      - agraph
 
-  # Frontend Services
   frontend:
     <<: *frontend-app
     environment:
@@ -211,7 +153,6 @@ services:
       internal:
         aliases:
           - portal-frontend
-          - frontend-agraph
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
@@ -219,29 +160,7 @@ services:
       frontend-node:
         condition: service_started
       api:
-        condition: service_started
-    profiles:
-      - 4store
-
-  frontend-agraph:
-    <<: *frontend-app
-    environment:
-      <<: *frontend-env
-    networks:
-      internal:
-        aliases:
-          - portal-frontend
-          - frontend-agraph
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    depends_on:
-      <<: *frontend-depends-on
-      frontend-node:
-        condition: service_started
-      api-agraph:
-        condition: service_started
-    profiles:
-      - agraph
+        condition: service_healthy
 
   frontend-node:
     <<: *frontend-app
@@ -249,26 +168,8 @@ services:
     networks:
       - internal
 
-  frontend-test:
-    <<: *frontend-app
-    command: "./bin/rails console"
-    environment:
-      <<: *frontend-env
-    depends_on:
-      db:
-        condition: service_healthy
-      cache:
-        condition: service_started
-      chrome-server:
-        condition: service_started
-    networks:
-      - internal
-      - external
-
-  # Shared Infrastructure Services
   redis-ut:
     image: redis
-    # No host port bindings to avoid conflicts with other stacks; reachable via internal network
     volumes:
       - redis-data:/data
     healthcheck:
@@ -279,39 +180,21 @@ services:
     networks:
       - internal
 
-  store4:
-    image: bde2020/4store
-    platform: linux/arm64
-    ports:
-      - "8081:9000"
-    volumes:
-      - 4store-data:/var/lib/4store
-    command: >
-      bash -c "4s-backend-setup --segments 4 ontoportal_kb && 4s-backend
-      ontoportal_kb && 4s-httpd -D -s-1 -p 9000 ontoportal_kb"
-    profiles:
-      - 4store
-    networks:
-      - internal
-
   solr-ut:
     image: solr:8
     volumes:
       - ./api/config/solr:/configsets:ro
       - solr-data:/var/solr
-    # No host port binding to avoid conflicts with other stacks; reachable via internal network
     command: >
-      bash -c "precreate-core term_search_core1 /configsets/term_search &&
-      precreate-core prop_search_core1 /configsets/property_search &&
-      precreate-core lexical_search_core1 /configsets/lexical_search &&
-      solr-foreground"
+      bash -c "precreate-core term_search_core1 /configsets/term_search
+      && precreate-core prop_search_core1 /configsets/property_search
+      && precreate-core lexical_search_core1 /configsets/lexical_search
+      && solr-foreground"
     healthcheck:
       test:
         [
           "CMD-SHELL",
-          "curl -sf
-            http://localhost:8983/solr/term_search_core1/admin/ping?wt=json |
-            grep -iq '\"status\":\"OK\"}' || exit 1",
+          'curl -sf http://localhost:8983/solr/term_search_core1/admin/ping?wt=json | grep -iq ''"status":"OK"}'' || exit 1',
         ]
       start_period: 5s
       interval: 10s
@@ -347,17 +230,16 @@ services:
       - "10035:10035"
     command: >
       bash -c "/agraph/bin/agraph-control --config /agraph/etc/agraph.cfg start
-      ; agtool repos create ontoportal_test ; agtool users add anonymous ;
-      agtool users grant anonymous root:ontoportal_test:rw ; tail -f
-      /agraph/data/agraph.log"
+      ; agtool repos create ontoportal_test
+      ; agtool users add anonymous
+      ; agtool users grant anonymous root:ontoportal_test:rw
+      ; tail -f /agraph/data/agraph.log"
     healthcheck:
       test: ["CMD-SHELL", "agtool storage-report ontoportal_test || exit 1"]
       start_period: 30s
       interval: 20s
       timeout: 10s
       retries: 10
-    profiles:
-      - agraph
     networks:
       - internal
 
@@ -408,71 +290,10 @@ services:
     command: ["-m", "1024"]
     networks:
       - internal
-    ports:
-      - "11211:11211"
-
-  chrome-server:
-    image: selenium/standalone-chrome:112.0-chromedriver-112.0-grid-4.9.0-20230421
-    platform: linux/amd64
-    shm_size: 2g
-    network_mode: "host"
-
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
-    container_name: elasticsearch
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    volumes:
-      - elasticsearch-data:/usr/share/elasticsearch/data
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    profiles:
-      - not_integrated
-    networks:
-      - internal
-
-  neo4j:
-    image: neo4j:5.13-community
-    container_name: neo4j
-    environment:
-      - NEO4J_AUTH=neo4j/password
-      - NEO4J_dbms_memory_pagecache_size=1G
-      - NEO4J_dbms_memory_heap_initial__size=1G
-      - NEO4J_dbms_memory_heap_max__size=1G
-    ports:
-      - "7474:7474" # HTTP
-      - "7687:7687" # Bolt
-    volumes:
-      - neo4j-data:/data
-      - neo4j-logs:/logs
-      - neo4j-import:/var/lib/neo4j/import
-      - neo4j-plugins:/plugins
-    healthcheck:
-      test: ["CMD", "cypher-shell", "-u", "neo4j", "-p", "password", "RETURN 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    profiles:
-      - not_integrated
-    networks:
-      - internal
 
 networks:
-  default:
-    external: true
-    name: ${COMPOSE_EXTERNAL_NETWORK:-teresia-shared}
   internal:
-    external: true
-    name: ${COMPOSE_EXTERNAL_NETWORK:-teresia-shared}
-  external:
+    driver: bridge
 
 volumes:
   api-bundle:
@@ -484,26 +305,8 @@ volumes:
     external: true
   rails_cache:
   assets:
-  elasticsearch-data:
-    name: portal_elasticsearch_persistent
-    driver: local
-  neo4j-data:
-    name: portal_neo4j_data_persistent
-    driver: local
-  neo4j-logs:
-    name: portal_neo4j_logs_persistent
-    driver: local
-  neo4j-import:
-    name: portal_neo4j_import_persistent
-    driver: local
-  neo4j-plugins:
-    name: portal_neo4j_plugins_persistent
-    driver: local
   redis-data:
     name: portal_redis_persistent
-    driver: local
-  4store-data:
-    name: portal_4store_persistent
     driver: local
   solr-data:
     name: portal_solr_persistent

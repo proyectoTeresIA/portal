@@ -58,90 +58,102 @@ Cada hito cuenta con su propia **memoria técnica**, siguiendo una estructura es
 
 ---
 
-## Despliegue y Entorno de Desarrollo
+## Despliegue y Entorno de Desarrollo (rama ia)
 
-En esta versión inicial del OntoPortal, se utilizan los servicios que utiliza OntoPortal por defecto:
+Desde la rama `ia` se usa un unico fichero `docker-compose.yml`, sin perfiles, con AllegroGraph como backend RDF y un proxy Nginx interno listo para trabajar bajo un prefijo de ruta.
 
-- **Ruby** (v3.1.6): Lenguaje de programación de la API y el frontend.
-- **Sinatra** (v1.0): Framework web en Ruby para el backend.
-- **Rails** (v7.2.2.1): Framework web en Ruby para el frontend.
-- **JavaScript** para extender la interactividad y visualización en el frontend con **Node.js** (v20) para compilar ese código en JavaScript.
-- **Docker** (v28.3.3): Para el despliegue de todos los servicios.
-- Servicios:
-  - **Redis** (v8): Base de datos en memoria para caché.
-  - **Solr** (v8): Motor de búsqueda para indexación.
-  - **Mgrep** (v0.0.2): Servicio de anotación y búsqueda de Ontoportal.
-  - Bases de datos RDF. Se pueden utilizar dos opciones:
-    - **4store** (v1.1.6): Base de datos de grafos RDF.
-    - **AllegroGraph** (v8.1.0): Base de datos de grafos RDF.
-  - **MySQL** (v8.0): Base de datos para licencias y usuarios.
+Stack incluido:
 
-### Requisitos Previos
+- API (Sinatra + Unicorn)
+- Frontend (Rails)
+- Worker `ncbo-cron`
+- Nginx
+- AllegroGraph
+- Solr
+- Redis
+- Mgrep
+- MySQL
+- Memcached
 
-- **Docker** 20.x.
-- 8 GB de RAM recomendados
+### Requisitos previos
 
-### Instalación Rápida (Infraestructura Base)
+- Docker Engine y Docker Compose Plugin
+- 8 GB RAM recomendados
 
-Clonar repositorio y descargar submódulos:
+### Flujo recomendado (siempre en ia)
 
 ```bash
 git clone https://github.com/proyectoTeresIA/portal
+cd portal
 
-git submodule init
-git submodule update
+git checkout ia
+git submodule update --init --recursive
+git submodule update --remote --merge
 ```
 
-Configurar entorno
+### Configuracion de entorno
 
 ```bash
 cp .env.sample .env
 ```
 
-Editar variables de entorno según sea necesario. Para simplemente testear, no es necesario modificar nada.
+Valores clave en `.env`:
 
-Levantar servicios con la API usando 4store:
+- `API_KEY`: clave admin del portal
+- `PORTAL_BASE_PATH`: prefijo de ruta (por defecto `/teresia-portal`)
+- `PUBLIC_UI_URL`: URL publica base (por defecto `http://localhost`)
+- `EXTERNAL_API_URL`: URL publica de API con prefijo (por defecto `http://localhost/teresia-portal/api`)
+- `PORTAL_HTTP_PORT`: puerto HTTP expuesto por el contenedor Nginx (por defecto `80`)
+
+### Arranque local
 
 ```bash
-docker compose --profile 4store up -d
+docker compose up -d
 ```
 
-O levantar los servicios con la API usando AllegroGraph:
-
-```bash
-docker compose --profile agraph up -d
-```
-
-A continuación, hay que crear el usuario administrador para que la interfaz web funcione correctamente:
+Crear/recuperar usuario admin y API key:
 
 ```bash
 docker compose exec api bash -c "ruby create_admin_user.rb"
 ```
 
-O, si se utiliza AllegroGraph:
+Copiar la API key mostrada por el script a `.env` y reiniciar frontend y API:
 
 ```bash
-docker compose exec api-agraph bash -c "ruby create_admin_user.rb"
+docker compose restart api frontend
 ```
 
-En la consola aparecerá la API Key, que se debe copiar y pegar en el archivo `.env` como valor de `API_KEY`:
+Acceso local:
 
-```bash
-API_KEY=la_clave_api_generada
+- Portal: http://localhost/teresia-portal/
+- API publica (via proxy): http://localhost/teresia-portal/api
+
+### Uso en servidor remoto detras de Nginx institucional
+
+Si el Nginx de la universidad publica una ruta como `https://wiig.dia.fi.upm.es/teresia-portal`, mantener:
+
+- `PORTAL_BASE_PATH=/teresia-portal`
+- `PUBLIC_UI_URL=https://wiig.dia.fi.upm.es`
+- `EXTERNAL_API_URL=https://wiig.dia.fi.upm.es/teresia-portal/api`
+- `PORTAL_HTTP_PORT=8080` (recomendado para no ocupar el 80 del host)
+
+Ejemplo de bloque en Nginx del host:
+
+```nginx
+location /teresia-portal/ {
+      proxy_pass http://127.0.0.1:8080/teresia-portal/;
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}
+
+location /teresia-portal/api/ {
+      proxy_pass http://127.0.0.1:8080/teresia-portal/api/;
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}
 ```
-
-Una vez configurada la clave API, hay que reiniciar el servicio del frontend para que reconozca la nueva clave:
-
-```bash
-docker compose restart frontend # Si se usa 4store
-# o
-docker compose restart frontend-agraph # Si se usa AllegroGraph
-```
-
-Una vez levantados los servicios, se puede acceder a la interfaz web en:
-
-- **Frontend**: http://localhost:3000
-- **API**: http://localhost:9393
 
 ## Cronjobs y tareas programadas
 
