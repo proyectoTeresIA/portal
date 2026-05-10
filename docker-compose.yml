@@ -33,6 +33,7 @@ x-api-app: &api-app
     bundle exec unicorn -p 9393 -o 0.0.0.0"
   tty: true
   volumes:
+    - reports-data:/reports
     - api-bundle:/srv/ontoportal/bundle
     - ./api:/srv/ontoportal/ontologies_api
     - ../ontologies_linked_data:/srv/ontologies_linked_data:ro
@@ -495,6 +496,9 @@ volumes:
     external: true
   rails_cache:
   assets:
+  reports-data:
+    name: portal_reports
+    driver: local
   elasticsearch-data:
     name: portal_elasticsearch_persistent
     driver: local
