@@ -23,7 +23,7 @@ case "${1:-}" in
   start)
     echo "▶ Starting TeresIA portal..."
     docker compose up -d
-    echo "✓ Services started. Portal available at http://localhost/teresia-portal/"
+    echo "✓ Services started. Portal available at http://localhost:8080/teresia-portal/"
     ;;
 
   stop)
@@ -36,7 +36,7 @@ case "${1:-}" in
     echo "↺ Restarting TeresIA portal..."
     docker compose down
     docker compose up -d
-    echo "✓ Services restarted. Portal available at http://localhost/teresia-portal/"
+    echo "✓ Services restarted. Portal available at http://localhost:8080/teresia-portal/"
     ;;
 
   logs)
@@ -64,7 +64,7 @@ case "${1:-}" in
     echo "🔨 Rebuilding containers..."
     docker compose up -d --build
 
-    echo "✓ Update complete. Portal available at http://localhost/teresia-portal/"
+    echo "✓ Update complete. Portal available at http://localhost:8080/teresia-portal/"
     ;;
 
   *)
