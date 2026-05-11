@@ -214,3 +214,55 @@ location /teresia-portal/api/ {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 }
 ```
+
+## 12. Incidencias criticas (produccion)
+
+### 12.1 Error `ArgumentError in HomeController#index` (odd number of arguments for Hash)
+
+Si aparece este error en `/teresia-portal/`, el frontend desplegado no tiene la correccion actual del controlador.
+
+La version correcta usa `each_with_object({})` para construir `@ontologies_hash` en `frontend/app/controllers/home_controller.rb`.
+
+Pasos de correccion en servidor:
+
+```bash
+cd /ruta/al/portal
+git checkout ia
+git pull --rebase
+git submodule update --init --recursive
+git submodule update --remote --merge
+
+docker compose build frontend
+docker compose up -d frontend nginx
+docker compose logs --tail=120 frontend
+```
+
+Comprobacion esperada: `GET /teresia-portal/` responde `200` y ya no aparece `ArgumentError`.
+
+### 12.2 Subida RDF falla en Fuseki (`Neither ?default nor ?graph`)
+
+Para backend `fuseki`, la escritura RDF exige `?default` o `?graph` en la URL de `GOO_PATH_DATA`.
+
+Asegura en `.env`:
+
+```env
+GOO_BACKEND_NAME=fuseki
+GOO_HOST=fuseki-ut
+GOO_PORT=3030
+GOO_PATH_QUERY=/ontoportal_test/query
+GOO_PATH_DATA=/ontoportal_test/data?default
+GOO_PATH_UPDATE=/ontoportal_test/update
+RACK_ENV=development
+```
+
+Importante: `api` y `ncbo-cron-worker` deben compartir el mismo `RACK_ENV` y apuntar al mismo Fuseki.
+
+Aplicar cambios:
+
+```bash
+docker compose up -d --build api ncbo-cron-worker
+docker compose restart api ncbo-cron-worker frontend
+docker compose logs -f ncbo-cron-worker
+```
+
+Resultado esperado: la submission avanza a estado `RDF` y vuelven las pestanas de exploracion (por ejemplo, "Entrada Terminologica").

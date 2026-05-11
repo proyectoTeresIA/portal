@@ -7,6 +7,7 @@ x-api-app: &api-app
   env_file:
     - .env
   environment: &api-env
+    RACK_ENV: development
     BUNDLE_PATH: /srv/ontoportal/bundle
     BUNDLE_APP_CONFIG: /srv/ontoportal/ontologies_api/.bundle
     ONTLD_PATH: /srv/ontologies_linked_data
@@ -90,7 +91,7 @@ services:
       GOO_PORT: 3030
       GOO_HOST: fuseki-ut
       GOO_PATH_QUERY: /ontoportal_test/query
-      GOO_PATH_DATA: /ontoportal_test/data
+      GOO_PATH_DATA: /ontoportal_test/data?default
       GOO_PATH_UPDATE: /ontoportal_test/update
     depends_on:
       <<: *api-depends-on
@@ -117,7 +118,7 @@ services:
       GOO_PORT: 3030
       GOO_HOST: fuseki-ut
       GOO_PATH_QUERY: /ontoportal_test/query
-      GOO_PATH_DATA: /ontoportal_test/data
+      GOO_PATH_DATA: /ontoportal_test/data?default
       GOO_PATH_UPDATE: /ontoportal_test/update
     depends_on:
       <<: *api-depends-on
