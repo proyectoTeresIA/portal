@@ -7,7 +7,7 @@ x-api-app: &api-app
   env_file:
     - .env
   environment: &api-env
-    RACK_ENV: development
+    RACK_ENV: ${RACK_ENV:-development}
     BUNDLE_PATH: /srv/ontoportal/bundle
     BUNDLE_APP_CONFIG: /srv/ontoportal/ontologies_api/.bundle
     ONTLD_PATH: /srv/ontologies_linked_data
@@ -47,8 +47,8 @@ x-frontend-app: &frontend-app
   build:
     context: ./frontend
     args:
-      RAILS_ENV: ${RAILS_ENV:-development}
-      NODE_ENV: ${NODE_ENV:-development}
+      RAILS_ENV: ${RAILS_ENV:-production}
+      NODE_ENV: ${NODE_ENV:-production}
       BUNDLE_WITHOUT: ${BUNDLE_WITHOUT:-production test}
   command: bash -c "yarn install && yarn build && ./bin/setup && ./bin/rails s -b 0.0.0.0"
   env_file:
@@ -65,7 +65,7 @@ x-frontend-app: &frontend-app
     cache:
       condition: service_started
   environment: &frontend-env
-    RAILS_ENV: development
+    RAILS_ENV: ${RAILS_ENV:-production}
     BUNDLE_WITHOUT: ""
     BUNDLE_PATH: /usr/local/bundle
     UI_URL: ${PUBLIC_UI_URL:-http://localhost}
