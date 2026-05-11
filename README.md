@@ -266,3 +266,100 @@ docker compose logs -f ncbo-cron-worker
 ```
 
 Resultado esperado: la submission avanza a estado `RDF` y vuelven las pestanas de exploracion (por ejemplo, "Entrada Terminologica").
+
+## 13. Configuracion de produccion validada (wiig)
+
+Esta es la configuracion que se ha validado para despliegue en `https://wiig.dia.fi.upm.es/teresia-portal`.
+
+### 13.1 Variables `.env` recomendadas
+
+```env
+RAILS_ENV=production
+NODE_ENV=production
+RACK_ENV=production
+
+PUBLIC_UI_URL=https://wiig.dia.fi.upm.es
+UI_URL=https://wiig.dia.fi.upm.es
+PORTAL_BASE_PATH=/teresia-portal
+UI_BASE_PATH=/teresia-portal
+EXTERNAL_API_URL=https://wiig.dia.fi.upm.es/teresia-portal/api
+
+PORTAL_HTTP_PORT=4080
+GOO_BACKEND_NAME=fuseki
+GOO_HOST=fuseki-ut
+GOO_PORT=3030
+GOO_PATH_QUERY=/ontoportal_test/query
+GOO_PATH_DATA=/ontoportal_test/data?default
+GOO_PATH_UPDATE=/ontoportal_test/update
+```
+
+Notas:
+
+- `SECRET_KEY_BASE` debe ser real (no placeholder), por ejemplo generado con `openssl rand -hex 64`.
+- `API_KEY` debe corresponder al usuario `admin` del entorno de servidor (no reutilizar la de local).
+
+### 13.2 `docker-compose.yml` (claves)
+
+Comprobar que no quedan hardcodeados valores de desarrollo:
+
+- `x-frontend-app.build.args.RAILS_ENV: ${RAILS_ENV:-production}`
+- `x-frontend-app.build.args.NODE_ENV: ${NODE_ENV:-production}`
+- `x-frontend-app.environment.RAILS_ENV: ${RAILS_ENV:-production}`
+- `x-api-app.environment.RACK_ENV: ${RACK_ENV:-development}`
+
+### 13.3 Nginx externo (host wiig)
+
+En el Nginx del host (el que publica HTTPS), reenviar siempre `https` al upstream para evitar perdida de sesion:
+
+```nginx
+location /teresia-portal/ {
+  proxy_pass http://127.0.0.1:4080/teresia-portal/;
+  proxy_set_header Host $host;
+  proxy_set_header X-Forwarded-Host $host;
+  proxy_set_header X-Forwarded-Port 443;
+  proxy_set_header X-Forwarded-Proto https;
+  proxy_set_header X-Forwarded-Ssl on;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}
+```
+
+### 13.4 Despliegue/reinicio recomendado
+
+```bash
+git pull --rebase origin ia
+git submodule update --init --recursive
+docker compose up -d --build --force-recreate frontend api ncbo-cron-worker nginx
+```
+
+### 13.5 Verificaciones post-despliegue
+
+```bash
+docker compose exec frontend printenv RAILS_ENV
+docker compose exec frontend bash -lc 'bundle exec rails runner "puts Rails.env; puts Rails.application.config.force_ssl"'
+curl -I https://wiig.dia.fi.upm.es/teresia-portal/login
+```
+
+Esperado:
+
+- `RAILS_ENV=production`
+- `Rails.env` = `production`
+- `force_ssl` = `true`
+- no redirecciones a `http://...` tras login
+
+### 13.6 Metricas de nuevas terminologias
+
+Las metricas se calculan de forma asincrona en `ncbo-cron-worker`.
+
+Comprobar estado:
+
+```bash
+curl -s "https://wiig.dia.fi.upm.es/teresia-portal/api/ontologies/AS/submissions/1?include=submissionStatus,metrics&apikey=<API_KEY>"
+```
+
+Si no aparece `METRICS`, forzar solo ese paso:
+
+```bash
+curl -X PUT "https://wiig.dia.fi.upm.es/teresia-portal/api/admin/ontologies/AS?actions=run_metrics&apikey=<API_KEY>"
+docker compose logs -f ncbo-cron-worker | egrep -i "AS/submissions/1|METRICS|ERROR_METRICS|metrics_for_submission"
+```
