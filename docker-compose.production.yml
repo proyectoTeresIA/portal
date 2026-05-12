@@ -104,7 +104,7 @@ services:
         condition: service_started
 
   # NcboCron Worker Service for processing ontologies (4store)
-  ncbo-cron-worker-4store:
+  ncbo-cron-worker:
     <<: *api-app
     command: bash /srv/ontoportal/ontologies_api/scripts/start-ncbo-cron.sh
     environment:
@@ -145,7 +145,7 @@ services:
         condition: service_healthy
 
   # NcboCron Worker Service for processing ontologies (AG)
-  ncbo-cron-worker:
+  ncbo-cron-worker-agraph:
     <<: *api-app
     command: bash /srv/ontoportal/ontologies_api/scripts/start-ncbo-cron.sh
     environment:
@@ -285,12 +285,11 @@ services:
       precreate-core lexical_search_core1 /configsets/lexical_search &&
       solr-foreground"
     healthcheck:
-      test:
-        [
+      test: [
           "CMD-SHELL",
-          "curl -sf
-            http://localhost:8983/solr/term_search_core1/admin/ping?wt=json |
-            grep -iq '\"status\":\"OK\"}' || exit 1",
+          'curl -sf
+          http://localhost:8983/solr/term_search_core1/admin/ping?wt=json |
+          grep -iq ''"status":"OK"}'' || exit 1',
         ]
       start_period: 5s
       interval: 10s
