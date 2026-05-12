@@ -84,6 +84,26 @@ x-frontend-app: &frontend-app
     retries: 5
     start_period: 60s
 
+x-nginx-app: &nginx-app
+  build:
+    context: ./nginx
+    dockerfile: Dockerfile
+  ports:
+    - "80:80"
+    - "443:443"
+  networks:
+    - internal
+  restart: unless-stopped
+  volumes:
+    - ./nginx/certs:/etc/nginx/certs:ro
+    - ./nginx/www:/var/www/certbot:ro
+  healthcheck:
+    test: ["CMD", "nginx", "-t"]
+    interval: 30s
+    timeout: 10s
+    retries: 5
+    start_period: 30s
+
 services:
   # API Services (4store)
   api:
@@ -169,43 +189,20 @@ services:
 
   # Nginx reverse proxy
   nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - internal
-    restart: unless-stopped
+    <<: *nginx-app
     profiles:
       - 4store
     depends_on:
       api:
         condition: service_healthy
-    volumes:
-      - ./nginx/certs:/etc/nginx/certs:ro
-      - ./nginx/www:/var/www/certbot:ro
 
   nginx-agraph:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - internal
-    restart: unless-stopped
+    <<: *nginx-app
     profiles:
-      - 4store
       - agraph
     depends_on:
       api-agraph:
         condition: service_healthy
-    volumes:
-      - ./nginx/certs:/etc/nginx/certs:ro
-      - ./nginx/www:/var/www/certbot:ro
 
   # Frontend Services
   frontend:
