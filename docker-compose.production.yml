@@ -264,8 +264,15 @@ services:
     volumes:
       - 4store-data:/var/lib/4store
     command: >
-      bash -c "4s-backend-setup --segments 4 ontoportal_kb && 4s-backend
-      ontoportal_kb && 4s-httpd -D -s-1 -p 9000 ontoportal_kb"
+      bash -c "
+        if [ ! -d /var/lib/4store/ontoportal_kb ]; then
+          echo '[4store] Initializing knowledge base...' &&
+          4s-backend-setup --segments 4 ontoportal_kb;
+        else
+          echo '[4store] Knowledge base already exists, skipping setup.';
+        fi &&
+        4s-backend ontoportal_kb &&
+        4s-httpd -D -s-1 -p 9000 ontoportal_kb"
     profiles:
       - 4store
     networks:
