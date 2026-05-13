@@ -10,6 +10,7 @@ x-api-app: &api-app
     BUNDLE_WITHOUT: "development test"
 
     # App
+    BASE_PATH: /teresia-portal/api
     RACK_ENV: production
     COVERAGE: "false"
     OVERRIDE_CONFIG: "true"
@@ -67,6 +68,7 @@ x-frontend-app: &frontend-app
     NODE_ENV: production
     BUNDLE_WITHOUT: "development test"
     BUNDLE_PATH: /usr/local/bundle
+    BASE_PATH: /teresia-portal
     API_KEY: ${API_KEY}
     DB_HOST: db
     MEMCACHE_SERVERS: "cache:11211"
@@ -83,26 +85,6 @@ x-frontend-app: &frontend-app
     timeout: 10s
     retries: 5
     start_period: 60s
-
-x-nginx-app: &nginx-app
-  build:
-    context: ./nginx
-    dockerfile: Dockerfile
-  ports:
-    - "80:80"
-    - "443:443"
-  networks:
-    - internal
-  restart: unless-stopped
-  volumes:
-    - ./nginx/certs:/etc/nginx/certs:ro
-    - ./nginx/www:/var/www/certbot:ro
-  healthcheck:
-    test: ["CMD", "nginx", "-t"]
-    interval: 30s
-    timeout: 10s
-    retries: 5
-    start_period: 30s
 
 services:
   # API Services (4store)
@@ -187,23 +169,6 @@ services:
     networks:
       - internal
 
-  # Nginx reverse proxy
-  nginx:
-    <<: *nginx-app
-    profiles:
-      - 4store
-    depends_on:
-      api:
-        condition: service_healthy
-
-  nginx-agraph:
-    <<: *nginx-app
-    profiles:
-      - agraph
-    depends_on:
-      api-agraph:
-        condition: service_healthy
-
   # Frontend Services
   frontend:
     <<: *frontend-app
@@ -262,8 +227,15 @@ services:
     volumes:
       - 4store-data:/var/lib/4store
     command: >
-      bash -c "4s-backend-setup --segments 4 ontoportal_kb && 4s-backend
-      ontoportal_kb && 4s-httpd -D -s-1 -p 9000 ontoportal_kb"
+      bash -c "
+        if [ ! -d /var/lib/4store/ontoportal_kb ]; then
+          echo '[4store] Initializing knowledge base...' &&
+          4s-backend-setup --segments 4 ontoportal_kb;
+        else
+          echo '[4store] Knowledge base already exists, skipping setup.';
+        fi &&
+        4s-backend ontoportal_kb &&
+        4s-httpd -D -s-1 -p 9000 ontoportal_kb"
     profiles:
       - 4store
     networks:
@@ -384,26 +356,9 @@ services:
     ports:
       - "11211:11211"
 
-  # Certbot service for obtaining and renewing Let's Encrypt certificates.
-  # Once we have domain, run to obtain initial cert (replace DOMAIN and EMAIL):
-  #   docker compose -f docker-compose.production.yml run --rm certbot certonly \
-  #     --webroot -w /var/www/certbot -d DOMAIN --email EMAIL --agree-tos --no-eff-email
-  # Then reload nginx: docker compose -f docker-compose.production.yml exec nginx nginx -s reload
-  # Renewal loop runs twice daily; you can add a deploy-hook to reload nginx automatically.
-  certbot:
-    image: certbot/certbot:latest
-    profiles:
-      - 4store
-      - agraph
-    volumes:
-      - ./nginx/certs:/etc/letsencrypt
-      - ./nginx/www:/var/www/certbot
-    entrypoint: sh
-    command: -c "while :; do certbot renew --webroot -w /var/www/certbot --quiet
-      --deploy-hook 'nginx -s reload || true'; sleep 12h; done"
-
 networks:
   internal:
+    name: ontoportal_internal
   external:
 
 volumes:
