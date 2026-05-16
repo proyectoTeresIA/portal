@@ -118,6 +118,8 @@ jobs:
             cd /app/portal
 
             docker compose -f docker-compose.production.yml --profile 4store pull
-            docker rollout -f docker-compose.production.yml --profile 4store api ncbo-cron-worker frontend
+            docker rollout -f docker-compose.production.yml --profile 4store api
+            docker rollout -f docker-compose.production.yml --profile 4store ncbo-cron-worker
+            docker rollout -f docker-compose.production.yml --profile 4store frontend
 
             docker image prune -f
