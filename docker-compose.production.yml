@@ -2,9 +2,8 @@ x-api-app: &api-app
   image: ${API_IMAGE:-ghcr.io/proyectoteresia/portal/api:latest}
   env_file:
     - .env
-  environment:
+  environment: &api-env
     # Ruby/Bundler
-    &api-env
     BUNDLE_PATH: /srv/ontoportal/bundle
     BUNDLE_APP_CONFIG: /srv/ontoportal/ontologies_api/.bundle
     BUNDLE_WITHOUT: "development test"
@@ -76,6 +75,11 @@ x-frontend-app: &frontend-app
   volumes:
     - frontend-bundle:/usr/local/bundle
     - rails_cache:/app/tmp/cache
+  depends_on: &frontend-depends-on
+    db:
+      condition: service_healthy
+    cache:
+      condition: service_started
   tmpfs:
     - /tmp
     - /app/tmp/pids
@@ -177,10 +181,7 @@ services:
         aliases:
           - frontend
     depends_on:
-      db:
-        condition: service_healthy
-      cache:
-        condition: service_started
+      <<: *frontend-depends-on
       api:
         condition: service_started
     profiles:
@@ -193,10 +194,7 @@ services:
         aliases:
           - frontend
     depends_on:
-      db:
-        condition: service_healthy
-      cache:
-        condition: service_started
+      <<: *frontend-depends-on
       api-agraph:
         condition: service_started
     profiles:
