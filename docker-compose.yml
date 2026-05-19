@@ -215,7 +215,7 @@ services:
   fuseki-ut:
     image: conceptkernel/jena-fuseki
     user: "0:0"
-    command: ["--update", "--loc=/fuseki/databases", "/ontoportal_test"]
+    command: ["--quiet", "--update", "--loc=/fuseki/databases", "/ontoportal_test"]
     environment:
       ADMIN_PASSWORD: xyzzy
     volumes:
