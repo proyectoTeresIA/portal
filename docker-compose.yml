@@ -10,6 +10,7 @@ x-api-app: &api-app
     RACK_ENV: ${RACK_ENV:-development}
     BUNDLE_PATH: /srv/ontoportal/bundle
     BUNDLE_APP_CONFIG: /srv/ontoportal/ontologies_api/.bundle
+    DATADIR: /srv/ontoportal/ontologies_api
     ONTLD_PATH: /srv/ontologies_linked_data
     COVERAGE: "true"
     OVERRIDE_CONFIG: "true"
@@ -29,7 +30,7 @@ x-api-app: &api-app
     MGREP_PORT: 55556
     MGREP_ALT_HOST: mgrep-ut
   stdin_open: true
-  command: bash -lc "git config --global --add safe.directory /srv/ontologies_linked_data || true; bundle check || bundle install && bundle exec unicorn -p 9393 -o 0.0.0.0"
+  command: bash -lc "(cd /tmp && git config --global --add safe.directory /srv/ontologies_linked_data) || true; bundle check || bundle install && bundle exec unicorn -p 9393 -o 0.0.0.0"
   tty: true
   volumes:
     - api-bundle:/srv/ontoportal/bundle

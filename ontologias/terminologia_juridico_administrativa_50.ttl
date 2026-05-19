@@ -1,0 +1,1639 @@
+@prefix base: <http://teresia.es/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/3.0/lexinfo#> .
+@prefix lexvo: <http://lexvo.org/id/> .
+@prefix ms: <http://w3id.org/meta-share/meta-share/2.0.0/> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix rdf: <https://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix termlex: <https://termlex.oeg.fi.upm.es/termlex/> .
+@prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://teresia.es/authors/teresia_demo> a ms:Actor;
+  ms:isResourceCreatorOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  rdfs:label "TeresIA Demo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa> a ms:LexicalConceptualResource;
+  ms:language <http://lexvo.org/id/iso639-3/spa>;
+  ms:resourceCreator <http://teresia.es/authors/teresia_demo>;
+  ms:resourceName "Terminología jurídico-administrativa de prueba";
+  ms:url <http://teresia.es/resources/terminologia_juridico_administrativa> .
+
+<http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>
+  a skos:Concept;
+  skos:isTopConceptOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_domainScheme>;
+  skos:prefLabel "Procedimiento administrativo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/organizacion_administrativa_domain>
+  a skos:Concept;
+  skos:isTopConceptOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_domainScheme>;
+  skos:prefLabel "Organización administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/gestion_documental_domain>
+  a skos:Concept;
+  skos:isTopConceptOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_domainScheme>;
+  skos:prefLabel "Gestión documental" .
+
+<http://teresia.es/terminologia_juridico_administrativa/licencias_autorizaciones_domain>
+  a skos:Concept;
+  skos:isTopConceptOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_domainScheme>;
+  skos:prefLabel "Licencias y autorizaciones" .
+
+<http://teresia.es/terminologia_juridico_administrativa/contratacion_publica_domain>
+  a skos:Concept;
+  skos:isTopConceptOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_domainScheme>;
+  skos:prefLabel "Contratación pública" .
+
+<http://teresia.es/terminologia_juridico_administrativa/notificacion_administrativa_domain>
+  a skos:Concept;
+  skos:isTopConceptOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_domainScheme>;
+  skos:prefLabel "Notificación administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/administracion_electronica_domain>
+  a skos:Concept;
+  skos:isTopConceptOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_domainScheme>;
+  skos:prefLabel "Administración electrónica" .
+
+<http://teresia.es/terminologia_juridico_administrativa/recursos_reclamaciones_domain>
+  a skos:Concept;
+  skos:isTopConceptOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_domainScheme>;
+  skos:prefLabel "Recursos y reclamaciones" .
+
+<http://teresia.es/terminologia_juridico_administrativa/potestad_sancionadora_domain>
+  a skos:Concept;
+  skos:isTopConceptOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_domainScheme>;
+  skos:prefLabel "Potestad sancionadora" .
+
+<http://teresia.es/terminologia_juridico_administrativa/responsabilidad_patrimonial_domain>
+  a skos:Concept;
+  skos:isTopConceptOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_domainScheme>;
+  skos:prefLabel "Responsabilidad patrimonial" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1_es_acto_administrativo_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1_es_acto_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Actuación formal de una administración pública que produce efectos jurídicos sobre una persona, entidad o situación concreta." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1_es_acto_administrativo_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1_es_acto_administrativo_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1_es_acto_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1_es_acto_administrativo_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "acto administrativo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1_es_acto_administrativo_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C1_es_acto_administrativo_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/organizacion_administrativa_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2_es_administracion_publica_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2_es_administracion_publica_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Conjunto de órganos, organismos y entidades que ejercen funciones públicas al servicio del interés general." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2_es_administracion_publica_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2_es_administracion_publica_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2_es_administracion_publica_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2_es_administracion_publica_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "administración pública" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2_es_administracion_publica_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C2_es_administracion_publica_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3_es_alegacion_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3_es_alegacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Manifestación o argumento presentado por una persona interesada dentro de un procedimiento administrativo." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3_es_alegacion_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3_es_alegacion_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3_es_alegacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3_es_alegacion_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "alegación" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3_es_alegacion_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C3_es_alegacion_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/gestion_documental_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4_es_archivo_del_expediente_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4_es_archivo_del_expediente_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Finalización de la tramitación de un expediente cuando no procede continuar el procedimiento o cuando este ha concluido." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4_es_archivo_del_expediente_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4_es_archivo_del_expediente_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4_es_archivo_del_expediente_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4_es_archivo_del_expediente_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "archivo del expediente" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4_es_archivo_del_expediente_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C4_es_archivo_del_expediente_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5_es_audiencia_al_interesado_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5_es_audiencia_al_interesado_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Trámite que permite a la persona interesada conocer el expediente y formular alegaciones antes de la resolución." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5_es_audiencia_al_interesado_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5_es_audiencia_al_interesado_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5_es_audiencia_al_interesado_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5_es_audiencia_al_interesado_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "audiencia al interesado" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5_es_audiencia_al_interesado_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C5_es_audiencia_al_interesado_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/licencias_autorizaciones_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6_es_autorizacion_administrativa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6_es_autorizacion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Acto por el que la administración permite realizar una actividad sometida a control previo." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6_es_autorizacion_administrativa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6_es_autorizacion_administrativa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6_es_autorizacion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6_es_autorizacion_administrativa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "autorización administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6_es_autorizacion_administrativa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C6_es_autorizacion_administrativa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7_es_caducidad_del_procedimiento_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7_es_caducidad_del_procedimiento_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Terminación del procedimiento por el transcurso del plazo máximo sin actuación suficiente para continuarlo." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7_es_caducidad_del_procedimiento_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7_es_caducidad_del_procedimiento_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7_es_caducidad_del_procedimiento_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7_es_caducidad_del_procedimiento_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "caducidad del procedimiento" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7_es_caducidad_del_procedimiento_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C7_es_caducidad_del_procedimiento_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/gestion_documental_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8_es_certificado_administrativo_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8_es_certificado_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Documento expedido por una administración pública que acredita oficialmente un hecho, dato o situación." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8_es_certificado_administrativo_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8_es_certificado_administrativo_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8_es_certificado_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8_es_certificado_administrativo_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "certificado administrativo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8_es_certificado_administrativo_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C8_es_certificado_administrativo_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/organizacion_administrativa_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9_es_competencia_administrativa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9_es_competencia_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Atribución legal que permite a un órgano administrativo actuar sobre una materia determinada." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9_es_competencia_administrativa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9_es_competencia_administrativa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9_es_competencia_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9_es_competencia_administrativa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "competencia administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9_es_competencia_administrativa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C9_es_competencia_administrativa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/licencias_autorizaciones_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10_es_concesion_administrativa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10_es_concesion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Título que habilita a una persona o entidad para usar un bien público o prestar un servicio bajo control administrativo." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10_es_concesion_administrativa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10_es_concesion_administrativa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10_es_concesion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10_es_concesion_administrativa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "concesión administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10_es_concesion_administrativa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C10_es_concesion_administrativa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/contratacion_publica_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11_es_contratacion_publica_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11_es_contratacion_publica_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Actividad mediante la cual las administraciones seleccionan proveedores para obras, servicios o suministros." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11_es_contratacion_publica_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11_es_contratacion_publica_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11_es_contratacion_publica_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11_es_contratacion_publica_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "contratación pública" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11_es_contratacion_publica_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C11_es_contratacion_publica_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/licencias_autorizaciones_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12_es_declaracion_responsable_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12_es_declaracion_responsable_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Documento por el que una persona manifiesta que cumple los requisitos exigidos para ejercer una actividad o derecho." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12_es_declaracion_responsable_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12_es_declaracion_responsable_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12_es_declaracion_responsable_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12_es_declaracion_responsable_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "declaración responsable" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12_es_declaracion_responsable_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C12_es_declaracion_responsable_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/recursos_reclamaciones_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13_es_desestimacion_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13_es_desestimacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Resolución que rechaza una solicitud, recurso o pretensión formulada ante la administración." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13_es_desestimacion_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13_es_desestimacion_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13_es_desestimacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13_es_desestimacion_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "desestimación" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13_es_desestimacion_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C13_es_desestimacion_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/notificacion_administrativa_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14_es_domicilio_a_efectos_de_notificaciones_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14_es_domicilio_a_efectos_de_notificaciones_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Dirección física o electrónica señalada para recibir comunicaciones administrativas." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14_es_domicilio_a_efectos_de_notificaciones_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14_es_domicilio_a_efectos_de_notificaciones_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14_es_domicilio_a_efectos_de_notificaciones_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14_es_domicilio_a_efectos_de_notificaciones_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "domicilio a efectos de notificaciones" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14_es_domicilio_a_efectos_de_notificaciones_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C14_es_domicilio_a_efectos_de_notificaciones_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/potestad_sancionadora_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15_es_ejecucion_forzosa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15_es_ejecucion_forzosa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Actuación administrativa dirigida a hacer cumplir una obligación cuando la persona obligada no la cumple voluntariamente." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15_es_ejecucion_forzosa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15_es_ejecucion_forzosa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15_es_ejecucion_forzosa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15_es_ejecucion_forzosa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "ejecución forzosa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15_es_ejecucion_forzosa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C15_es_ejecucion_forzosa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/gestion_documental_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16_es_expediente_administrativo_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16_es_expediente_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Conjunto ordenado de documentos y actuaciones que sirven de antecedente y fundamento a una resolución administrativa." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16_es_expediente_administrativo_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16_es_expediente_administrativo_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16_es_expediente_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16_es_expediente_administrativo_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "expediente administrativo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16_es_expediente_administrativo_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C16_es_expediente_administrativo_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/administracion_electronica_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17_es_firma_electronica_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17_es_firma_electronica_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Conjunto de datos electrónicos que permite identificar a una persona y vincularla con un documento o trámite digital." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17_es_firma_electronica_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17_es_firma_electronica_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17_es_firma_electronica_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17_es_firma_electronica_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "firma electrónica" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17_es_firma_electronica_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C17_es_firma_electronica_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18_es_informe_preceptivo_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18_es_informe_preceptivo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Informe que debe solicitarse obligatoriamente durante la tramitación de un procedimiento." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18_es_informe_preceptivo_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18_es_informe_preceptivo_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18_es_informe_preceptivo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18_es_informe_preceptivo_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "informe preceptivo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18_es_informe_preceptivo_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C18_es_informe_preceptivo_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19_es_iniciacion_de_oficio_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19_es_iniciacion_de_oficio_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Comienzo de un procedimiento administrativo por decisión de la propia administración." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19_es_iniciacion_de_oficio_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19_es_iniciacion_de_oficio_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19_es_iniciacion_de_oficio_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19_es_iniciacion_de_oficio_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "iniciación de oficio" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19_es_iniciacion_de_oficio_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C19_es_iniciacion_de_oficio_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20_es_interesado_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20_es_interesado_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Persona física o jurídica cuyos derechos o intereses pueden verse afectados por un procedimiento administrativo." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20_es_interesado_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20_es_interesado_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20_es_interesado_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20_es_interesado_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "interesado" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20_es_interesado_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C20_es_interesado_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/licencias_autorizaciones_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21_es_licencia_administrativa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21_es_licencia_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Autorización otorgada por una administración para realizar una actividad sujeta a control previo." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21_es_licencia_administrativa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21_es_licencia_administrativa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21_es_licencia_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21_es_licencia_administrativa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "licencia administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21_es_licencia_administrativa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C21_es_licencia_administrativa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/contratacion_publica_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22_es_mesa_de_contratacion_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22_es_mesa_de_contratacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Órgano de asistencia técnica que interviene en la valoración de ofertas dentro de un procedimiento de contratación pública." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22_es_mesa_de_contratacion_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22_es_mesa_de_contratacion_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22_es_mesa_de_contratacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22_es_mesa_de_contratacion_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "mesa de contratación" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22_es_mesa_de_contratacion_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C22_es_mesa_de_contratacion_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/notificacion_administrativa_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23_es_notificacion_administrativa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23_es_notificacion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Comunicación formal de un acto administrativo a la persona interesada." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23_es_notificacion_administrativa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23_es_notificacion_administrativa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23_es_notificacion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23_es_notificacion_administrativa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "notificación administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23_es_notificacion_administrativa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C23_es_notificacion_administrativa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/organizacion_administrativa_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24_es_organo_colegiado_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24_es_organo_colegiado_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Órgano administrativo integrado por varias personas que adopta decisiones de forma conjunta." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24_es_organo_colegiado_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24_es_organo_colegiado_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24_es_organo_colegiado_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24_es_organo_colegiado_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "órgano colegiado" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24_es_organo_colegiado_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C24_es_organo_colegiado_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25_es_plazo_administrativo_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25_es_plazo_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Periodo de tiempo establecido para realizar una actuación dentro de un procedimiento administrativo." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25_es_plazo_administrativo_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25_es_plazo_administrativo_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25_es_plazo_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25_es_plazo_administrativo_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "plazo administrativo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25_es_plazo_administrativo_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C25_es_plazo_administrativo_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26_es_procedimiento_administrativo_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26_es_procedimiento_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Secuencia ordenada de trámites mediante la cual una administración adopta una decisión con efectos jurídicos." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26_es_procedimiento_administrativo_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26_es_procedimiento_administrativo_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26_es_procedimiento_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26_es_procedimiento_administrativo_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "procedimiento administrativo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26_es_procedimiento_administrativo_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C26_es_procedimiento_administrativo_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/recursos_reclamaciones_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27_es_recurso_administrativo_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27_es_recurso_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Medio de impugnación presentado ante la administración para solicitar la revisión de un acto administrativo." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27_es_recurso_administrativo_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27_es_recurso_administrativo_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27_es_recurso_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27_es_recurso_administrativo_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "recurso administrativo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27_es_recurso_administrativo_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C27_es_recurso_administrativo_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/administracion_electronica_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28_es_registro_electronico_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28_es_registro_electronico_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Sistema que permite presentar solicitudes, escritos y comunicaciones ante una administración por medios electrónicos." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28_es_registro_electronico_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28_es_registro_electronico_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28_es_registro_electronico_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28_es_registro_electronico_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "registro electrónico" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28_es_registro_electronico_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C28_es_registro_electronico_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29_es_resolucion_administrativa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29_es_resolucion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Decisión formal que pone fin a un procedimiento administrativo o decide una cuestión planteada en él." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29_es_resolucion_administrativa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29_es_resolucion_administrativa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29_es_resolucion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29_es_resolucion_administrativa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "resolución administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29_es_resolucion_administrativa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C29_es_resolucion_administrativa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/responsabilidad_patrimonial_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30_es_responsabilidad_patrimonial_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30_es_responsabilidad_patrimonial_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Obligación de la administración de indemnizar daños causados por el funcionamiento de los servicios públicos cuando proceda legalmente." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30_es_responsabilidad_patrimonial_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30_es_responsabilidad_patrimonial_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30_es_responsabilidad_patrimonial_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30_es_responsabilidad_patrimonial_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "responsabilidad patrimonial" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30_es_responsabilidad_patrimonial_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C30_es_responsabilidad_patrimonial_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/administracion_electronica_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31_es_sede_electronica_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31_es_sede_electronica_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Dirección electrónica disponible para que la ciudadanía acceda a servicios, trámites e información administrativa." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31_es_sede_electronica_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31_es_sede_electronica_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31_es_sede_electronica_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31_es_sede_electronica_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "sede electrónica" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31_es_sede_electronica_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C31_es_sede_electronica_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32_es_silencio_administrativo_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32_es_silencio_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Efecto jurídico que se produce cuando la administración no resuelve expresamente dentro del plazo establecido." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32_es_silencio_administrativo_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32_es_silencio_administrativo_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32_es_silencio_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32_es_silencio_administrativo_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "silencio administrativo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32_es_silencio_administrativo_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C32_es_silencio_administrativo_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33_es_subsanacion_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33_es_subsanacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Trámite que permite corregir defectos u omisiones en una solicitud o documentación presentada." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33_es_subsanacion_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33_es_subsanacion_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33_es_subsanacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33_es_subsanacion_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "subsanación" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33_es_subsanacion_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C33_es_subsanacion_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34_es_tramite_administrativo_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34_es_tramite_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Actuación concreta que forma parte de un procedimiento administrativo." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34_es_tramite_administrativo_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34_es_tramite_administrativo_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34_es_tramite_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34_es_tramite_administrativo_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "trámite administrativo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34_es_tramite_administrativo_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C34_es_tramite_administrativo_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35_es_validez_del_acto_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35_es_validez_del_acto_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Cualidad de un acto administrativo que cumple los requisitos legales necesarios para producir efectos." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35_es_validez_del_acto_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35_es_validez_del_acto_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35_es_validez_del_acto_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35_es_validez_del_acto_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "validez del acto" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35_es_validez_del_acto_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C35_es_validez_del_acto_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/recursos_reclamaciones_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36_es_via_administrativa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36_es_via_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Ámbito de actuación y revisión ante la propia administración antes de acudir, cuando proceda, a la jurisdicción contencioso-administrativa." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36_es_via_administrativa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36_es_via_administrativa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36_es_via_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36_es_via_administrativa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "vía administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36_es_via_administrativa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C36_es_via_administrativa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/contratacion_publica_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37_es_adjudicacion_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37_es_adjudicacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Decisión por la que se selecciona una oferta o una persona adjudicataria en un procedimiento de contratación pública." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37_es_adjudicacion_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37_es_adjudicacion_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37_es_adjudicacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37_es_adjudicacion_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "adjudicación" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37_es_adjudicacion_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C37_es_adjudicacion_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/contratacion_publica_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38_es_licitacion_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38_es_licitacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Procedimiento mediante el cual una administración solicita y evalúa ofertas para contratar obras, servicios o suministros." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38_es_licitacion_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38_es_licitacion_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38_es_licitacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38_es_licitacion_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "licitación" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38_es_licitacion_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C38_es_licitacion_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/contratacion_publica_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39_es_pliego_de_clausulas_administrativas_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39_es_pliego_de_clausulas_administrativas_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Documento que establece las condiciones jurídicas y administrativas de un contrato público." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39_es_pliego_de_clausulas_administrativas_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39_es_pliego_de_clausulas_administrativas_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39_es_pliego_de_clausulas_administrativas_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39_es_pliego_de_clausulas_administrativas_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "pliego de cláusulas administrativas" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39_es_pliego_de_clausulas_administrativas_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C39_es_pliego_de_clausulas_administrativas_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/contratacion_publica_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40_es_perfil_del_contratante_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40_es_perfil_del_contratante_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Espacio electrónico donde se publica información relativa a la actividad contractual de una administración." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40_es_perfil_del_contratante_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40_es_perfil_del_contratante_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40_es_perfil_del_contratante_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40_es_perfil_del_contratante_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "perfil del contratante" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40_es_perfil_del_contratante_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C40_es_perfil_del_contratante_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/notificacion_administrativa_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41_es_requerimiento_administrativo_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41_es_requerimiento_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Comunicación por la que la administración solicita a una persona que aporte información, documentación o realice una actuación." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41_es_requerimiento_administrativo_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41_es_requerimiento_administrativo_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41_es_requerimiento_administrativo_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41_es_requerimiento_administrativo_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "requerimiento administrativo" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41_es_requerimiento_administrativo_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C41_es_requerimiento_administrativo_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/potestad_sancionadora_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42_es_sancion_administrativa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42_es_sancion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Consecuencia jurídica impuesta por la administración por la comisión de una infracción administrativa." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42_es_sancion_administrativa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42_es_sancion_administrativa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42_es_sancion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42_es_sancion_administrativa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "sanción administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42_es_sancion_administrativa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C42_es_sancion_administrativa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/potestad_sancionadora_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43_es_infraccion_administrativa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43_es_infraccion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Conducta tipificada por una norma como contraria al ordenamiento administrativo y susceptible de sanción." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43_es_infraccion_administrativa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43_es_infraccion_administrativa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43_es_infraccion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43_es_infraccion_administrativa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "infracción administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43_es_infraccion_administrativa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C43_es_infraccion_administrativa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/potestad_sancionadora_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44_es_inspeccion_administrativa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44_es_inspeccion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Actividad de comprobación y control realizada por la administración para verificar el cumplimiento de la normativa." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44_es_inspeccion_administrativa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44_es_inspeccion_administrativa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44_es_inspeccion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44_es_inspeccion_administrativa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "inspección administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44_es_inspeccion_administrativa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C44_es_inspeccion_administrativa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/recursos_reclamaciones_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45_es_reclamacion_administrativa_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45_es_reclamacion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Solicitud presentada ante la administración para exigir la revisión de una actuación, la protección de un derecho o la reparación de un perjuicio." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45_es_reclamacion_administrativa_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45_es_reclamacion_administrativa_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45_es_reclamacion_administrativa_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45_es_reclamacion_administrativa_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "reclamación administrativa" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45_es_reclamacion_administrativa_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C45_es_reclamacion_administrativa_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46_es_representacion_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46_es_representacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Actuación de una persona en nombre de otra ante la administración, acreditada por los medios legalmente admitidos." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46_es_representacion_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46_es_representacion_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46_es_representacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46_es_representacion_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "representación" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46_es_representacion_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C46_es_representacion_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/administracion_electronica_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47_es_apoderamiento_apud_acta_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47_es_apoderamiento_apud_acta_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Otorgamiento de representación realizado ante una administración o mediante comparecencia electrónica." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47_es_apoderamiento_apud_acta_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47_es_apoderamiento_apud_acta_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47_es_apoderamiento_apud_acta_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47_es_apoderamiento_apud_acta_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "apoderamiento apud acta" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47_es_apoderamiento_apud_acta_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C47_es_apoderamiento_apud_acta_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48_es_computo_de_plazos_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48_es_computo_de_plazos_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Regla utilizada para calcular el inicio, duración y finalización de los plazos administrativos." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48_es_computo_de_plazos_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48_es_computo_de_plazos_noun_masculine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48_es_computo_de_plazos_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48_es_computo_de_plazos_noun_masculine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:masculine;
+  ontolex:writtenRep "cómputo de plazos" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48_es_computo_de_plazos_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C48_es_computo_de_plazos_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/recursos_reclamaciones_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49_es_estimacion_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49_es_estimacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Resolución que acepta total o parcialmente una solicitud, recurso o pretensión presentada ante la administración." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49_es_estimacion_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49_es_estimacion_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49_es_estimacion_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49_es_estimacion_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "estimación" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49_es_estimacion_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C49_es_estimacion_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50>
+  a ontolex:LexicalConcept;
+  dct:subject <http://teresia.es/terminologia_juridico_administrativa/notificacion_administrativa_domain>;
+  skos:definition <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50_es_Definition>;
+  skos:inScheme <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa>;
+  ontolex:isEvokedBy <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50_es_publicacion_oficial_noun_entry>;
+  ontolex:lexicalizedSense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50_es_publicacion_oficial_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50_es_Definition>
+  a termlex:Definition;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  rdfs:label "Difusión de actos, disposiciones o anuncios en un boletín o sede oficial para producir efectos jurídicos o informativos." .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50_es_publicacion_oficial_noun_entry>
+  a ontolex:LexicalEntry;
+  dct:language <http://lexvo.org/id/iso639-3/spa>;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:evokes <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50>;
+  ontolex:lexicalForm <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50_es_publicacion_oficial_noun_feminine_form>;
+  ontolex:sense <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50_es_publicacion_oficial_noun_sense> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50_es_publicacion_oficial_noun_feminine_form>
+  a ontolex:Form;
+  lexinfo:gender lexinfo:feminine;
+  ontolex:writtenRep "publicación oficial" .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50_es_publicacion_oficial_noun_sense>
+  a ontolex:LexicalSense;
+  ontolex:isLexicalizedSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50>;
+  ontolex:isSenseOf <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_C50_es_publicacion_oficial_noun_entry> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_conceptset>
+  a ontolex:ConceptSet;
+  dct:source <http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa> .
+
+<http://teresia.es/terminologia_juridico_administrativa/terminologia_juridico_administrativa_domainScheme>
+  a skos:ConceptScheme;
+  skos:hasTopConcept <http://teresia.es/terminologia_juridico_administrativa/procedimiento_administrativo_domain>,
+    <http://teresia.es/terminologia_juridico_administrativa/organizacion_administrativa_domain>,
+    <http://teresia.es/terminologia_juridico_administrativa/gestion_documental_domain>,
+    <http://teresia.es/terminologia_juridico_administrativa/licencias_autorizaciones_domain>,
+    <http://teresia.es/terminologia_juridico_administrativa/contratacion_publica_domain>,
+    <http://teresia.es/terminologia_juridico_administrativa/notificacion_administrativa_domain>,
+    <http://teresia.es/terminologia_juridico_administrativa/administracion_electronica_domain>,
+    <http://teresia.es/terminologia_juridico_administrativa/recursos_reclamaciones_domain>,
+    <http://teresia.es/terminologia_juridico_administrativa/potestad_sancionadora_domain>,
+    <http://teresia.es/terminologia_juridico_administrativa/responsabilidad_patrimonial_domain> .
