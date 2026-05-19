@@ -132,13 +132,17 @@ services:
       - internal
 
   nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
+    image: nginx:stable-alpine
     ports:
-      - "${PORTAL_HTTP_PORT:-8080}:80"
+      - "${PORTAL_HTTP_PORT:-4080}:80"
     volumes:
-      - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/hub:/usr/share/nginx/html/hub:ro
+      - ./certs:/etc/nginx/certs:ro
+      - ./www:/var/www/certbot:ro
+    environment:
+      TERESIA_PORTAL_URL: ${TERESIA_PORTAL_URL:-https://localhost/teresia-portal}
     depends_on:
       api:
         condition: service_healthy
