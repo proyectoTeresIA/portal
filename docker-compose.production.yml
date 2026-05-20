@@ -215,6 +215,7 @@ services:
   # Shared Infrastructure Services
   redis-ut:
     image: redis:7
+    command: redis-server --appendonly yes --appendfsync everysec
     ports:
       - "6379:6379"
       - "6380:6379"
