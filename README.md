@@ -19,13 +19,28 @@ Stack principal:
 
 ## 2. Clonar repositorio y submodulos
 
-```bash
+```
 git clone https://github.com/proyectoTeresIA/portal
 cd portal
-
 git checkout ia
 git submodule update --init --recursive
 git submodule update --remote --merge
+```
+
+### Descargar ontologies_linked_data
+
+
+**Nota importante:** Actualmente `ontologies_linked_data` no está registrado como submódulo en `.gitmodules`. Si no aparece tras clonar el repositorio, debes clonarlo manualmente:
+
+```bash
+git clone https://github.com/proyectoTeresIA/ontologies_linked_data.git ontologies_linked_data
+```
+
+Si ya existe la carpeta y quieres actualizarla:
+
+```bash
+cd ontologies_linked_data
+git pull origin ia
 ```
 
 ## 3. Preparar entorno
