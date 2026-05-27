@@ -281,8 +281,10 @@ services:
   mgrep-ut:
     image: ontoportal/mgrep:0.0.2
     platform: linux/amd64
+    command: /start-mgrep.sh
     volumes:
       - mgrep-dictionary:/srv/mgrep/dictionary
+      - ./mgrep/start-mgrep.sh:/start-mgrep.sh:ro
     healthcheck:
       test: ["CMD", "nc", "-z", "-v", "127.0.0.1", "55556"]
       start_period: 3s
