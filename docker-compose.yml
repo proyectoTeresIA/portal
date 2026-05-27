@@ -22,6 +22,7 @@ x-api-app: &api-app
     REDIS_HOST: redis-ut
     ANNOTATOR_REDIS_HOST: redis-ut
     ANNOTATOR_REDIS_PORT: 6379
+    ANNOTATOR_CACHE_MIN_ENTRIES: 1000
     SOLR_TERM_SEARCH_URL: http://solr-ut:8983/solr/term_search_core1
     SOLR_PROP_SEARCH_URL: http://solr-ut:8983/solr/prop_search_core1
     SOLR_LEXICAL_SEARCH_URL: http://solr-ut:8983/solr/lexical_search_core1
@@ -339,8 +340,10 @@ services:
   mgrep-ut:
     image: ontoportal/mgrep:0.0.2
     platform: linux/amd64
+    command: /start-mgrep.sh
     volumes:
       - ./api/test/data/dictionary.txt:/srv/mgrep/dictionary/dictionary.txt
+      - ./mgrep/start-mgrep.sh:/start-mgrep.sh:ro
     healthcheck:
       test: ["CMD", "nc", "-z", "-v", "127.0.0.1", "55556"]
       start_period: 3s
