@@ -56,6 +56,8 @@ x-api-app: &api-app
     timeout: 10s
     retries: 5
     start_period: 60s
+  labels:
+    autoheal: "true"
 
 x-frontend-app: &frontend-app
   image: ${FRONTEND_IMAGE:-ghcr.io/proyectoteresia/portal/frontend:latest}
@@ -89,6 +91,8 @@ x-frontend-app: &frontend-app
     timeout: 10s
     retries: 5
     start_period: 60s
+  labels:
+    autoheal: "true"
 
 services:
   # API Services (4store)
@@ -107,7 +111,7 @@ services:
     depends_on:
       <<: *api-depends-on
       4store-ut:
-        condition: service_started
+        condition: service_healthy
 
   # NcboCron Worker Service for processing ontologies (4store)
   ncbo-cron-worker:
@@ -126,7 +130,7 @@ services:
     depends_on:
       <<: *api-depends-on
       4store-ut:
-        condition: service_started
+        condition: service_healthy
       api:
         condition: service_healthy
     networks:
@@ -215,6 +219,7 @@ services:
   # Shared Infrastructure Services
   redis-ut:
     image: redis:7
+    restart: unless-stopped
     command: redis-server --appendonly yes --appendfsync everysec
     ports:
       - "6379:6379"
@@ -227,11 +232,14 @@ services:
       interval: 10s
       timeout: 3s
       retries: 10
+    labels:
+      autoheal: "true"
     networks:
       - internal
 
   4store-ut:
     image: bde2020/4store
+    restart: unless-stopped
     platform: linux/amd64
     ports:
       - "8081:9000"
@@ -247,6 +255,14 @@ services:
         fi &&
         4s-backend ontoportal_kb &&
         4s-httpd -D -s-1 -p 9000 ontoportal_kb"
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/localhost/9000 && printf 'GET /status/ HTTP/1.0\\r\\nHost: localhost\\r\\n\\r\\n' >&3 && head -1 <&3 | grep -q '200 OK'"]
+      start_period: 30s
+      interval: 15s
+      timeout: 10s
+      retries: 3
+    labels:
+      autoheal: "true"
     profiles:
       - 4store
     networks:
@@ -254,6 +270,7 @@ services:
 
   solr-ut:
     image: solr:8
+    restart: unless-stopped
     volumes:
       - ./api/config/solr:/configsets:ro
       - solr-data:/var/solr
@@ -275,11 +292,14 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    labels:
+      autoheal: "true"
     networks:
       - internal
 
   mgrep-ut:
     image: ontoportal/mgrep:0.0.2
+    restart: unless-stopped
     platform: linux/amd64
     command: /start-mgrep.sh
     volumes:
@@ -291,11 +311,14 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    labels:
+      autoheal: "true"
     networks:
       - internal
 
   agraph-ut:
     image: franzinc/agraph:v8.1.0
+    restart: unless-stopped
     platform: linux/amd64
     environment:
       - AGRAPH_SUPER_USER=test
@@ -314,6 +337,8 @@ services:
       interval: 20s
       timeout: 10s
       retries: 10
+    labels:
+      autoheal: "true"
     profiles:
       - agraph
     networks:
@@ -359,15 +384,36 @@ services:
       retries: 5
       interval: 30s
       start_period: 60s
+    labels:
+      autoheal: "true"
 
   cache:
     image: memcached:latest
     restart: unless-stopped
     command: ["-m", "1024"]
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/localhost/11211 && printf 'stats\\r\\n' >&3 && head -1 <&3 | grep -q 'STAT'"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    labels:
+      autoheal: "true"
     networks:
       - internal
     ports:
       - "11211:11211"
+
+  autoheal:
+    image: willfarrell/autoheal:latest
+    restart: unless-stopped
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=autoheal
+      - AUTOHEAL_INTERVAL=30
+      - AUTOHEAL_START_PERIOD=0
+      - AUTOHEAL_DEFAULT_STOP_TIMEOUT=10
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   internal:
