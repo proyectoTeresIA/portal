@@ -125,7 +125,7 @@ services:
     environment:
       <<: *api-env
       GOO_BACKEND_NAME: 4store
-      GOO_PORT: 9000        # secondary httpd worker — isolates indexing from user API
+      GOO_PORT: 9001        # secondary httpd worker — isolates indexing from user API
       GOO_HOST: 4store-ut
       GOO_PATH_QUERY: /sparql/
       GOO_PATH_DATA: /data/
