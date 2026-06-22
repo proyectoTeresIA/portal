@@ -32,6 +32,14 @@ x-api-app: &api-app
     REPORT_PATH: /reports/ontologies_report.json
     REPOSITORY_FOLDER: /srv/ontoportal/data/repository
     DATADIR: /
+    # Defensive defaults to avoid indefinite request/SPARQL hangs in production.
+    ENABLE_REQ_TIMEOUT: ${ENABLE_REQ_TIMEOUT:-true}
+    REQ_TIMEOUT: ${REQ_TIMEOUT:-45}
+    SPARQL_IDLE_TIMEOUT: ${SPARQL_IDLE_TIMEOUT:-30}
+    SPARQL_UPDATE_RETRIES: ${SPARQL_UPDATE_RETRIES:-3}
+    SPARQL_UPDATE_RETRY_BASE_DELAY: ${SPARQL_UPDATE_RETRY_BASE_DELAY:-8}
+    SPARQL_QUERY_RETRIES: ${SPARQL_QUERY_RETRIES:-2}
+    SPARQL_QUERY_RETRY_BASE_DELAY: ${SPARQL_QUERY_RETRY_BASE_DELAY:-0.5}
   command: "bundle exec unicorn -p 9393 -o 0.0.0.0"
   restart: unless-stopped
   volumes:
@@ -125,7 +133,7 @@ services:
     environment:
       <<: *api-env
       GOO_BACKEND_NAME: 4store
-      GOO_PORT: 9001        # secondary httpd worker — isolates indexing from user API
+      GOO_PORT: 9000        # same 4store httpd endpoint as API (single-httpd mode)
       GOO_HOST: 4store-ut
       GOO_PATH_QUERY: /sparql/
       GOO_PATH_DATA: /data/
@@ -254,7 +262,6 @@ services:
        fi &&
        4s-backend ontoportal_kb &&
        sleep 2 &&
-       4s-httpd -D -U -s-1 -p 9001 ontoportal_kb &
        4s-httpd -D -U -s-1 -p 9000 ontoportal_kb"
     ports:
       - "8081:9000"
