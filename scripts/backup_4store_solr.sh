@@ -45,6 +45,7 @@ COMPOSE_FILE=${COMPOSE_FILE:-$PROJECT_DIR/docker-compose.production.yml}
 COMPOSE_PROFILE=${COMPOSE_PROFILE:-4store}
 BACKUP_DIR=${BACKUP_DIR:-/root/backup_ontoportal}
 BACKUP_RETENTION_DAYS=${BACKUP_RETENTION_DAYS:-15}
+BACKUP_RETENTION_COUNT=${BACKUP_RETENTION_COUNT:-0}
 FOURSTORE_VOLUME=${FOURSTORE_VOLUME:-portal_4store}
 SOLR_VOLUME=${SOLR_VOLUME:-portal_solr}
 IDLE_WINDOW_MINUTES=${IDLE_WINDOW_MINUTES:-5}
@@ -64,6 +65,27 @@ check_worker_idle() {
 
   IDLE_WINDOW_MINUTES="$IDLE_WINDOW_MINUTES" \
     "$SCRIPT_DIR/check_ncbo_cron_idle.sh"
+}
+
+prune_old_backups() {
+  local backup_count="${BACKUP_RETENTION_COUNT:-0}"
+
+  if [[ "$backup_count" =~ ^[0-9]+$ ]] && (( backup_count > 0 )); then
+    echo "[backup] pruning by count, keeping latest $backup_count backups"
+    mapfile -t backup_dirs < <(find "$BACKUP_DIR" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort)
+    local total=${#backup_dirs[@]}
+
+    if (( total > backup_count )); then
+      local to_delete=$((total - backup_count))
+      for ((i = 0; i < to_delete; i++)); do
+        rm -rf "$BACKUP_DIR/${backup_dirs[$i]}"
+      done
+    fi
+    return 0
+  fi
+
+  echo "[backup] pruning backups older than $BACKUP_RETENTION_DAYS days"
+  find "$BACKUP_DIR" -mindepth 1 -maxdepth 1 -type d -mtime +"$BACKUP_RETENTION_DAYS" -exec rm -rf {} +
 }
 
 mkdir -p "$TARGET_DIR"
@@ -103,11 +125,11 @@ project_dir=$PROJECT_DIR
 4store_volume=$FOURSTORE_VOLUME
 solr_volume=$SOLR_VOLUME
 retention_days=$BACKUP_RETENTION_DAYS
+retention_count=$BACKUP_RETENTION_COUNT
 idle_window_minutes=$IDLE_WINDOW_MINUTES
 allow_busy_worker=$ALLOW_BUSY_WORKER
 EOF
 
-echo "[backup] pruning backups older than $BACKUP_RETENTION_DAYS days"
-find "$BACKUP_DIR" -mindepth 1 -maxdepth 1 -type d -mtime +"$BACKUP_RETENTION_DAYS" -exec rm -rf {} +
+prune_old_backups
 
 echo "[backup] completed: $TARGET_DIR"

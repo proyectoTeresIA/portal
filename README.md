@@ -186,6 +186,7 @@ Variables configurables en `.env`:
 
 - `BACKUP_DIR=/root/backup_ontoportal`
 - `BACKUP_RETENTION_DAYS=15`
+- `BACKUP_RETENTION_COUNT=0` (si es mayor que 0, tiene prioridad y conserva solo los últimos N backups)
 - `IDLE_WINDOW_MINUTES=5`
 - `ALLOW_BUSY_WORKER=false`
 
@@ -203,10 +204,17 @@ Chequeo manual del worker antes del backup:
 
 Si el worker está activo, el script devolverá salida no nula. En ese caso, espera a que termine o lanza el backup con `ALLOW_BUSY_WORKER=true` solo si aceptas una ventana ligeramente menos segura.
 
-Ejemplo de cron diario a las 03:30:
+Ejemplo de cron semanal (domingo a las 00:00):
 
 ```bash
-30 3 * * * cd /app/portal && ./scripts/backup_4store_solr.sh >> /var/log/ontoportal-backup.log 2>&1
+0 0 * * 0 cd /app/portal && ./scripts/backup_4store_solr.sh >> /var/log/ontoportal-backup.log 2>&1
+```
+
+Para conservar aproximadamente 2 meses con backup semanal, configura:
+
+```dotenv
+BACKUP_RETENTION_COUNT=8
+BACKUP_RETENTION_DAYS=0
 ```
 
 Comprobación recomendada antes de lanzar el backup:
