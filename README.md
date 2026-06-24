@@ -171,6 +171,64 @@ Notas rápidas:
 - La mayoría de jobs se ejecutan con `NcboCron::Scheduler.scheduled_locking_job` y escriben trazas en `ontologies_api/log/scheduler.log`.
 - Las opciones específicas pueden ajustarse pasando variables de configuración al iniciar `ncbo_cron` (ver `api/scripts/start-ncbo-cron.sh`).
 
+## Backups de 4store y Solr
+
+Para proteger el triplestore y los índices de búsqueda, el repositorio incluye el script `scripts/backup_4store_solr.sh`.
+
+Características:
+
+- Para brevemente `ncbo-cron-worker`, `frontend`, `api`, `4store-ut` y `solr-ut` para generar una copia consistente.
+- Guarda `4store.tgz` y `solr.tgz` bajo `BACKUP_DIR/<timestamp>/`.
+- Elimina automáticamente backups más antiguos que `BACKUP_RETENTION_DAYS`.
+- Comprueba primero si `ncbo-cron-worker` parece estar ocioso con `scripts/check_ncbo_cron_idle.sh`.
+
+Variables configurables en `.env`:
+
+- `BACKUP_DIR=/root/backup_ontoportal`
+- `BACKUP_RETENTION_DAYS=15`
+- `IDLE_WINDOW_MINUTES=5`
+- `ALLOW_BUSY_WORKER=false`
+
+Ejecución manual:
+
+```bash
+./scripts/backup_4store_solr.sh
+```
+
+Chequeo manual del worker antes del backup:
+
+```bash
+./scripts/check_ncbo_cron_idle.sh
+```
+
+Si el worker está activo, el script devolverá salida no nula. En ese caso, espera a que termine o lanza el backup con `ALLOW_BUSY_WORKER=true` solo si aceptas una ventana ligeramente menos segura.
+
+Ejemplo de cron diario a las 03:30:
+
+```bash
+30 3 * * * cd /app/portal && ./scripts/backup_4store_solr.sh >> /var/log/ontoportal-backup.log 2>&1
+```
+
+Comprobación recomendada antes de lanzar el backup:
+
+```bash
+docker compose -f docker-compose.production.yml --profile 4store logs --since=5m ncbo-cron-worker | tail -80
+```
+
+Si en los últimos minutos no aparecen mensajes de procesamiento activo de submissions, y la API devuelve pocos o ningún cambio en `/submissions`, el worker está razonablemente ocioso para una parada corta. En situaciones críticas, la opción más segura sigue siendo parar brevemente `ncbo-cron-worker` antes del backup consistente.
+
+Restauración manual desde un backup existente:
+
+```bash
+./scripts/restore_4store_solr.sh 20260623-033000
+```
+
+También acepta una ruta absoluta al directorio del backup:
+
+```bash
+./scripts/restore_4store_solr.sh /root/backup_ontoportal/20260623-033000
+```
+
 ## Licencia
 
 El proyecto se desarrolla siguiendo estándares abiertos y es compatible con las licencias de uso de los recursos integrados.
